@@ -46,6 +46,7 @@ Abre `index.html` con doble clic en Chrome o Edge. El modo Cronómetro, los regi
 - Prueba el enlace en una laptop de la universidad: permite la cámara cuando Chrome lo pida.
 - Los registros se guardan solo en el navegador donde se midieron. Exporta el CSV al terminar cada sesión.
 - Ten el video de la demo como respaldo.
+- Para la demo en vivo, escribe en **Detener tras N ciclos** (panel «Medición en curso») cuántos ciclos quieres registrar: el registro se detiene solo al completar el último. 0 = sin límite.
 
 ## Componentes
 

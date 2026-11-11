@@ -172,6 +172,8 @@ label.f{display:grid;gap:5px;font-size:12.5px;font-weight:500;color:var(--ink-2)
 .clock{font:500 54px/1 var(--font-m);font-variant-numeric:tabular-nums;letter-spacing:-.03em;margin-top:10px}
 .clock .unit{font-size:16px;letter-spacing:0;color:var(--ink-3);margin-left:6px}
 .cycle{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:12px;border-top:1px solid var(--line-2)}
+.cycle.goal{margin-top:10px;padding-top:10px}
+.goal-done{color:var(--accent);font-weight:600}
 .cycle .num{font-size:18px;font-weight:600;min-width:2.4ch;text-align:center}
 .acts{display:grid;gap:8px}
 .act{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center}
@@ -342,6 +344,12 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
               <span class="num" id="cycNum">1</span>
               <button class="btn sm" type="button" id="cycPlus" aria-label="Ciclo siguiente">+</button>
               <span class="small muted" id="cycScen"></span>
+            </div>
+            <div class="cycle goal">
+              <label class="label" for="goal">Detener tras</label>
+              <input type="number" id="goal" min="0" max="99" step="1" style="width:68px" aria-describedby="goalProg">
+              <span class="label">ciclos</span>
+              <span class="small muted" id="goalProg"></span>
             </div>
           </div>
         </div>
@@ -548,7 +556,7 @@ function gauss(r){let u=0,v=0;while(u===0)u=r();v=r();return Math.sqrt(-2*Math.l
 
 /* ---------- config & data ---------- */
 function stripZones(k){const z=[],m=0.03,w=(1-m*(k+1))/k;for(let i=0;i<k;i++)z.push({x:m+i*(w+m),y:0.12,w:w,h:0.76});return z}
-function defaultCfg(){return{acts:['Doblar hoja','Ensobrar y cerrar','Etiquetar y apilar'],zones:stripZones(3),valor:[100,100,100],supl:[15,15,15],conv:'tn',horas:8,dwell:0.6,gap:1.5,minDur:0.8,mirror:false,srcFilter:'todas',excl:false,refSrc:'',be:{hm:2,ht:0.5,c:25,cf:300,cv:0}}}
+function defaultCfg(){return{acts:['Doblar hoja','Ensobrar y cerrar','Etiquetar y apilar'],zones:stripZones(3),valor:[100,100,100],supl:[15,15,15],conv:'tn',horas:8,dwell:0.6,gap:1.5,minDur:0.8,mirror:false,goal:0,srcFilter:'todas',excl:false,refSrc:'',be:{hm:2,ht:0.5,c:25,cf:300,cv:0}}}
 let cfg=Object.assign(defaultCfg(),store.get('cfg',{}));
 cfg.be=Object.assign(defaultCfg().be,cfg.be||{});
 function fixArrays(){const k=cfg.acts.length;['valor','supl'].forEach(key=>{const d=key==='valor'?100:15;cfg[key]=cfg[key].slice(0,k);while(cfg[key].length<k)cfg[key].push(d)});if(!Array.isArray(cfg.zones)||cfg.zones.length!==k)cfg.zones=stripZones(k)}
@@ -632,15 +640,29 @@ $('#clearExamples').addEventListener('click',()=>{records=records.filter(r=>r.so
 function afterData(){renderBanner();simBuilt=false;renderTab();renderRecent()}
 
 /* ---------- capture state ---------- */
-const cap={mode:'camara',recording:false,cycle:1,lastIdx:null};
+const cap={mode:'camara',recording:false,cycle:1,lastIdx:null,done:0,goalHit:false,lastGoal:0};
 function nextCycle(sc,src){let m=0;for(const r of records)if(r.scenario===sc&&r.source===src&&r.cycle>m)m=r.cycle;return m+1}
 function addObs(act,sec,source){
   if(cap.lastIdx!=null&&act<=cap.lastIdx)cap.cycle++;
   cap.lastIdx=act;
   records.push({id:uid(),ts:new Date().toISOString(),scenario,activity:act,activityName:cfg.acts[act],cycle:cap.cycle,seconds:Math.round(sec*100)/100,source});
+  if(cap.recording&&act===cfg.acts.length-1){cap.done++;const g=+cfg.goal||0;if(g>0&&cap.done>=g)cap.goalHit=true}
   saveRecords();renderBanner();renderRecent(true);renderCycle();simBuilt=false;
 }
-function renderCycle(){$('#cycNum').textContent=cap.cycle;$('#cycScen').textContent=scenario+' · '+SRC_LABEL[cap.mode==='camara'?'camara':'cronometro']}
+/* meta de ciclos: detiene el registro al completar el último ciclo pedido */
+function finishGoal(){
+  if(!cap.goalHit)return;
+  seg.cur=null;seg.cand=null;sw.cur=null;cap.recording=false;cap.goalHit=false;cap.lastGoal=cap.done;
+  renderCapture();note('Meta alcanzada: '+cap.done+(cap.done===1?' ciclo registrado':' ciclos registrados')+'. Registro detenido.');
+}
+function renderCycle(){$('#cycNum').textContent=cap.cycle;$('#cycScen').textContent=scenario+' · '+SRC_LABEL[cap.mode==='camara'?'camara':'cronometro'];
+  const g=+cfg.goal||0,el=$('#goalProg'),gi=$('#goal');if(document.activeElement!==gi)gi.value=g;
+  if(!g){el.className='small muted';el.textContent='0 = sin límite'}
+  else if(cap.recording){el.className='small muted';el.textContent='Completados '+cap.done+' de '+g}
+  else if(cap.lastGoal){el.className='small goal-done';el.textContent='Meta cumplida: '+cap.lastGoal+' de '+g}
+  else{el.className='small muted';el.textContent='Se detendrá solo al completar '+g}
+}
+$('#goal').addEventListener('input',e=>{const v=parseInt(e.target.value,10);cfg.goal=ok(v)&&v>=0?Math.min(99,v):0;cap.lastGoal=0;saveCfg();renderCycle()});
 $('#cycMinus').addEventListener('click',()=>{cap.cycle=Math.max(1,cap.cycle-1);cap.lastIdx=null;renderCycle()});
 $('#cycPlus').addEventListener('click',()=>{cap.cycle++;cap.lastIdx=null;renderCycle()});
 
@@ -660,21 +682,22 @@ function segFeed(t,hit){
     }else seg.cand=null;
   }
   if(seg.cur&&t-seg.cur.last>=cfg.gap){segClose(seg.cur,seg.cur.last);seg.cur=null}
+  finishGoal();
 }
 /* stopwatch */
 const sw={cur:null};
-function swPress(i){const t=performance.now()/1000;if(!cap.recording)startRecording();if(sw.cur){if(sw.cur.act===i)return;swClose(t)}sw.cur={act:i,start:t};renderPad()}
+function swPress(i){const t=performance.now()/1000;if(!cap.recording)startRecording();if(sw.cur){if(sw.cur.act===i)return;swClose(t);if(cap.goalHit){finishGoal();return}}sw.cur={act:i,start:t};renderPad()}
 function swClose(t){const c=sw.cur;sw.cur=null;const d=t-c.start;if(d>=0.2)addObs(c.act,d,'cronometro');renderPad()}
-$('#swStop').addEventListener('click',()=>{if(sw.cur)swClose(performance.now()/1000)});
+$('#swStop').addEventListener('click',()=>{if(sw.cur){swClose(performance.now()/1000);finishGoal()}});
 $('#swEnd').addEventListener('click',()=>stopRecording());
 document.addEventListener('keydown',e=>{
   if(curTab!=='captura'||cap.mode!=='cronometro')return;
   const tg=e.target.tagName;if(tg==='INPUT'||tg==='SELECT'||tg==='TEXTAREA')return;
-  if(e.key===' '){e.preventDefault();if(sw.cur)swClose(performance.now()/1000)}
+  if(e.key===' '){e.preventDefault();if(sw.cur){swClose(performance.now()/1000);finishGoal()}}
   const n=parseInt(e.key,10);if(n>=1&&n<=cfg.acts.length){e.preventDefault();swPress(n-1)}
 });
-function startRecording(){cap.recording=true;cap.cycle=nextCycle(scenario,cap.mode==='camara'?'camara':'cronometro');cap.lastIdx=null;seg.cur=null;seg.cand=null;renderCapture()}
-function stopRecording(){const t=performance.now()/1000;if(seg.cur){segClose(seg.cur,seg.cur.last);seg.cur=null}seg.cand=null;if(sw.cur)swClose(t);cap.recording=false;renderCapture()}
+function startRecording(){cap.recording=true;cap.done=0;cap.goalHit=false;cap.lastGoal=0;cap.cycle=nextCycle(scenario,cap.mode==='camara'?'camara':'cronometro');cap.lastIdx=null;seg.cur=null;seg.cand=null;renderCapture()}
+function stopRecording(){const t=performance.now()/1000;if(seg.cur){segClose(seg.cur,seg.cur.last);seg.cur=null}seg.cand=null;if(sw.cur)swClose(t);cap.recording=false;cap.goalHit=false;renderCapture()}
 
 let noteTimer=null;
 function note(msg){const el=$('#stageMsg');el.textContent=msg;el.hidden=false;clearTimeout(noteTimer);noteTimer=setTimeout(()=>{if(cam.stream)el.hidden=true},3500)}
