@@ -19,6 +19,24 @@ Si el archivo no está en el repositorio, la página lo descarga de los servidor
    `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task`
 2. Súbelo a la raíz del repositorio, junto a `index.html`, con ese mismo nombre.
 
+## Datos simulados incluidos
+
+La página carga, la primera vez que se abre, un estudio **simulado** (no son mediciones reales) para mostrar el método completo: 15 ciclos por escenario (AS-IS y TO-BE), medidos con tres fuentes (cámara, cronómetro físico y revisión de video). Un aviso en la parte superior lo indica, y el botón **Borrar datos simulados** los elimina antes de registrar un estudio real.
+
+| Indicador | AS-IS | TO-BE | Variación |
+|---|---|---|---|
+| TE del ciclo | 30,40 s | 25,53 s | −16,0 % |
+| Capacidad, un operario | 118,4 u/h | 141,0 u/h | +19,1 % |
+| Capacidad de línea (3 estaciones) | 250,9 u/h | 340,6 u/h | +35,7 % |
+| Cuello de botella | Ensobrar y cerrar | Ensobrar y cerrar | — |
+| Error medio frente al video | 0,31 s (manual) | 0,14 s (cámara) | −55 % |
+
+Valoración 100 %, suplementos 15 %, TE = TN × (1 + s). Archivos en la carpeta `datos/`:
+
+- `OptiTime_datos_simulados.csv`: los mismos registros, para importar en **Registros → Importar CSV**.
+- `OptiTime_Verificacion_Simulada.xlsx`: verificación en Excel con fórmulas vivas (análisis, precisión, horas-analista, comparación y punto de equilibrio). La hoja *Léeme* explica todos los supuestos.
+- `simular.py`: script que genera los datos (semilla fija, reproducible).
+
 ## Uso sin internet ni GitHub
 
 Abre `index.html` con doble clic en Chrome o Edge. El modo Cronómetro, los registros, el análisis y la comparación funcionan sin internet. La cámara funciona igual, pero en ese caso el modelo se descarga de internet.

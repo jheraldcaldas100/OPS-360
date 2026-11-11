@@ -279,7 +279,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
   </header>
 
   <div class="notice" id="exampleBanner" hidden>
-    <p><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="7.6"/><path d="M10 9.2v4.6M10 6.4v.1"/></svg><span><strong>Datos de ejemplo cargados.</strong> Sirven para conocer la herramienta y no son mediciones. Bórralos antes de registrar el estudio real.</span></p>
+    <p><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="7.6"/><path d="M10 9.2v4.6M10 6.4v.1"/></svg><span id="exampleTxt"><strong>Datos de ejemplo cargados.</strong> Sirven para conocer la herramienta y no son mediciones. Bórralos antes de registrar el estudio real.</span></p>
     <button class="btn sm" type="button" id="clearExamples">Borrar datos de ejemplo</button>
   </div>
 
@@ -563,8 +563,22 @@ function exampleRecords(){
   for(const sc of SCENS){for(let c=1;c<=10;c++){for(let a=0;a<3;a++){let x=spec[sc].m[a]+spec[sc].s[a]*gauss(r);if(sc==='AS-IS'&&a===1&&c===7)x+=4.2;x=Math.max(1,x);t+=x*1000;out.push({id:'ej'+sc+c+a,ts:new Date(t).toISOString(),scenario:sc,activity:a,activityName:names[a],cycle:c,seconds:Math.round(x*100)/100,source:'ejemplo'})}}}
   return out;
 }
+/* Datos SIMULADOS (no son mediciones): 15 ciclos por escenario, medidos con cámara, cronómetro físico y revisión de video.
+   Generados con datos/simular.py (semilla 20261111). Ver datos/OptiTime_Verificacion_Simulada.xlsx. */
+const SIM_DATASET='sim-2026-11-11';
+const SIM_DATA={"AS-IS":{"camara":[[8.0,13.13,5.53],[7.47,13.33,6.87],[7.33,12.53,6.2],[7.4,13.33,7.53],[7.73,12.47,6.4],[6.87,11.73,5.93],[7.2,13.2,5.73],[8.13,13.67,6.6],[7.73,11.27,6.47],[7.87,13.2,6.4],[6.67,12.27,6.8],[8.0,11.33,6.53],[7.53,11.27,6.4],[7.8,11.6,6.13],[7.67,12.8,6.53]],"manual":[[7.77,13.29,5.45],[8.16,13.45,6.2],[7.47,12.78,6.01],[7.62,12.86,8.39],[7.06,12.41,6.37],[7.03,11.85,6.44],[6.82,13.05,6.16],[7.9,13.91,5.69],[8.46,12.95,6.53],[7.44,13.22,6.75],[6.6,12.28,7.01],[7.52,11.55,6.53],[7.35,11.33,7.07],[6.91,11.64,6.86],[7.06,12.83,6.2]],"video":[[7.9,13.07,5.43],[7.87,13.4,6.57],[7.33,12.8,6.03],[7.5,13.27,7.33],[8.0,12.4,6.27],[6.83,11.83,6.03],[6.97,13.4,5.87],[8.07,13.73,6.33],[7.93,11.2,6.57],[7.7,13.3,6.37],[6.8,12.1,6.8],[7.93,11.4,6.47],[7.47,11.57,6.37],[7.7,11.53,6.2],[7.57,12.87,6.57]]},"TO-BE":{"camara":[[6.87,8.73,6.07],[7.47,10.07,5.67],[7.53,8.87,5.67],[6.93,9.67,5.0],[7.33,9.33,6.27],[7.8,9.67,5.93],[7.53,9.53,5.93],[6.93,8.27,5.67],[7.2,10.53,4.87],[7.67,8.8,5.67],[7.73,9.2,5.0],[7.33,7.33,5.67],[7.33,9.0,5.53],[7.4,9.33,5.2],[7.6,9.53,6.33]],"manual":[[7.5,8.34,5.67],[7.41,10.31,5.53],[7.46,9.07,5.8],[6.93,9.06,5.86],[6.86,9.13,7.14],[9.17,9.97,5.43],[7.76,9.18,6.31],[6.72,8.53,5.92],[6.97,9.77,5.57],[7.51,8.57,5.88],[7.81,9.26,5.08],[7.18,7.52,6.12],[6.97,8.76,5.71],[7.02,8.98,5.94],[6.7,10.72,6.1]],"video":[[6.9,8.93,5.77],[7.57,10.07,5.77],[7.27,9.03,5.7],[6.93,9.53,5.1],[7.33,9.5,6.33],[7.47,10.0,5.53],[7.7,9.4,6.13],[7.0,8.37,5.53],[7.13,10.3,5.23],[7.47,8.9,5.73],[7.63,9.07,5.23],[7.07,7.6,5.67],[7.23,9.0,5.87],[7.17,9.27,5.3],[7.3,9.9,6.0]]}};
+function simRecords(){
+  const names=['Doblar hoja','Ensobrar y cerrar','Etiquetar y apilar'],out=[];
+  const t0={'AS-IS':Date.UTC(2026,10,11,18,0,0),'TO-BE':Date.UTC(2026,10,11,18,40,0)};
+  for(const sc of SCENS){for(const src of ['camara','manual','video']){let t=t0[sc];const m=SIM_DATA[sc][src];
+    for(let c=0;c<m.length;c++){for(let a=0;a<3;a++){t+=m[c][a]*1000;out.push({id:'sim-'+sc+'-'+src+'-'+(c+1)+'-'+(a+1),ts:new Date(t).toISOString(),scenario:sc,activity:a,activityName:names[a],cycle:c+1,seconds:m[c][a],source:src,sim:true})}}}}
+  return out;
+}
 let records=store.get('records',null);
-if(!Array.isArray(records)){records=exampleRecords();store.set('records',records)}
+if(!Array.isArray(records)||(store.get('dataset','')!==SIM_DATASET&&records.every(r=>r.source==='ejemplo'||r.sim))){
+  records=simRecords();store.set('records',records);store.set('dataset',SIM_DATASET);
+  cfg.srcFilter='camara';cfg.refSrc='video';cfg.be={hm:80/60,ht:0.5,c:20,cf:150,cv:0};saveCfg();
+}
 const saveRecords=()=>store.set('records',records);
 let scenario=store.get('scenario','AS-IS'); if(!SCENS.includes(scenario))scenario='AS-IS';
 let anScen=scenario;
@@ -611,8 +625,10 @@ $$('.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.t
 function renderTab(){if(curTab==='captura')renderCapture();else if(curTab==='registros')renderRecords();else if(curTab==='analisis')renderAnalysis();else if(curTab==='comparacion')renderCompare()}
 function setScenario(s){if(cap.recording)stopRecording();scenario=s;store.set('scenario',s);$$('#scenSeg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.scen===s)));cap.cycle=nextCycle(s,cap.mode==='camara'?'camara':'cronometro');cap.lastIdx=null;renderCapture();if(curTab!=='captura')renderTab()}
 $$('#scenSeg button').forEach(b=>b.addEventListener('click',()=>setScenario(b.dataset.scen)));
-function renderBanner(){$('#exampleBanner').hidden=!records.some(r=>r.source==='ejemplo')}
-$('#clearExamples').addEventListener('click',()=>{records=records.filter(r=>r.source!=='ejemplo');saveRecords();afterData()});
+function renderBanner(){const sim=records.some(r=>r.sim),ex=records.some(r=>r.source==='ejemplo');$('#exampleBanner').hidden=!(sim||ex);
+  $('#exampleTxt').innerHTML=sim?'<strong>Datos simulados cargados.</strong> 15 ciclos por escenario (AS-IS y TO-BE) con tres fuentes: cámara, cronómetro físico y revisión de video. Ilustran el método y no son mediciones reales. Bórralos antes de registrar el estudio real.':'<strong>Datos de ejemplo cargados.</strong> Sirven para conocer la herramienta y no son mediciones. Bórralos antes de registrar el estudio real.';
+  $('#clearExamples').textContent=sim?'Borrar datos simulados':'Borrar datos de ejemplo'}
+$('#clearExamples').addEventListener('click',()=>{records=records.filter(r=>r.source!=='ejemplo'&&!r.sim);saveRecords();store.set('dataset',SIM_DATASET);afterData()});
 function afterData(){renderBanner();simBuilt=false;renderTab();renderRecent()}
 
 /* ---------- capture state ---------- */
@@ -962,9 +978,9 @@ function renderPrecision(){
 }
 $('#refSrc').addEventListener('change',e=>{cfg.refSrc=e.target.value;saveCfg();renderPrecision()});
 function renderBE(){
-  const b=cfg.be;['Hm','Ht','C','Cf','Cv'].forEach(k=>{const el=$('#be'+k);if(document.activeElement!==el)el.value=b[k.toLowerCase()]});
+  const b=cfg.be;['Hm','Ht','C','Cf','Cv'].forEach(k=>{const el=$('#be'+k);if(document.activeElement!==el)el.value=Math.round(b[k.toLowerCase()]*1e4)/1e4});
   const save=(b.hm-b.ht)*b.c-b.cv;
-  $('#beOut').innerHTML=save>0?'<p>Ahorro por estudio: <span class="num" style="font-weight:600">S/ '+fmt(save,2)+'</span>. La herramienta recupera su costo fijo a partir del estudio <span class="num" style="font-weight:600">N.º '+Math.ceil(b.cf/save||0)+'</span>'+(b.cf>0?' (equilibrio en '+fmt(b.cf/save,1)+' estudios)':'')+'.</p>':'<p class="down">Con estos supuestos la herramienta no ahorra: el costo por estudio con OptiTime es igual o mayor que el manual.</p>';
+  $('#beOut').innerHTML=save>0?'<p>Ahorro por estudio: <span class="num" style="font-weight:600">S/ '+fmt(save,2)+'</span>. La herramienta recupera su costo fijo a partir del estudio <span class="num" style="font-weight:600">N.º '+Math.ceil((b.cf/save||0)-1e-9)+'</span>'+(b.cf>0?' (equilibrio en '+fmt(b.cf/save,1)+' estudios)':'')+'.</p>':'<p class="down">Con estos supuestos la herramienta no ahorra: el costo por estudio con OptiTime es igual o mayor que el manual.</p>';
 }
 ['Hm','Ht','C','Cf','Cv'].forEach(k=>$('#be'+k).addEventListener('input',e=>{const v=parseFloat(e.target.value);if(ok(v)&&v>=0){cfg.be[k.toLowerCase()]=v;saveCfg();renderBE()}}));
 

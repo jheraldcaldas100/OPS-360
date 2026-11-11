@@ -1,0 +1,271 @@
+﻿id,fecha_hora,escenario,actividad_n,actividad,ciclo,tiempo_s,fuente
+sim-AS-IS-camara-1-1,2026-11-11T13:00:08Z,AS-IS,1,Doblar hoja,1,8.0,camara
+sim-AS-IS-camara-1-2,2026-11-11T13:00:21.130000Z,AS-IS,2,Ensobrar y cerrar,1,13.13,camara
+sim-AS-IS-camara-1-3,2026-11-11T13:00:26.660000Z,AS-IS,3,Etiquetar y apilar,1,5.53,camara
+sim-AS-IS-camara-2-1,2026-11-11T13:00:34.130000Z,AS-IS,1,Doblar hoja,2,7.47,camara
+sim-AS-IS-camara-2-2,2026-11-11T13:00:47.460000Z,AS-IS,2,Ensobrar y cerrar,2,13.33,camara
+sim-AS-IS-camara-2-3,2026-11-11T13:00:54.330000Z,AS-IS,3,Etiquetar y apilar,2,6.87,camara
+sim-AS-IS-camara-3-1,2026-11-11T13:01:01.660000Z,AS-IS,1,Doblar hoja,3,7.33,camara
+sim-AS-IS-camara-3-2,2026-11-11T13:01:14.190000Z,AS-IS,2,Ensobrar y cerrar,3,12.53,camara
+sim-AS-IS-camara-3-3,2026-11-11T13:01:20.390000Z,AS-IS,3,Etiquetar y apilar,3,6.2,camara
+sim-AS-IS-camara-4-1,2026-11-11T13:01:27.790000Z,AS-IS,1,Doblar hoja,4,7.4,camara
+sim-AS-IS-camara-4-2,2026-11-11T13:01:41.120000Z,AS-IS,2,Ensobrar y cerrar,4,13.33,camara
+sim-AS-IS-camara-4-3,2026-11-11T13:01:48.650000Z,AS-IS,3,Etiquetar y apilar,4,7.53,camara
+sim-AS-IS-camara-5-1,2026-11-11T13:01:56.380000Z,AS-IS,1,Doblar hoja,5,7.73,camara
+sim-AS-IS-camara-5-2,2026-11-11T13:02:08.850000Z,AS-IS,2,Ensobrar y cerrar,5,12.47,camara
+sim-AS-IS-camara-5-3,2026-11-11T13:02:15.250000Z,AS-IS,3,Etiquetar y apilar,5,6.4,camara
+sim-AS-IS-camara-6-1,2026-11-11T13:02:22.120000Z,AS-IS,1,Doblar hoja,6,6.87,camara
+sim-AS-IS-camara-6-2,2026-11-11T13:02:33.850000Z,AS-IS,2,Ensobrar y cerrar,6,11.73,camara
+sim-AS-IS-camara-6-3,2026-11-11T13:02:39.780000Z,AS-IS,3,Etiquetar y apilar,6,5.93,camara
+sim-AS-IS-camara-7-1,2026-11-11T13:02:46.980000Z,AS-IS,1,Doblar hoja,7,7.2,camara
+sim-AS-IS-camara-7-2,2026-11-11T13:03:00.180000Z,AS-IS,2,Ensobrar y cerrar,7,13.2,camara
+sim-AS-IS-camara-7-3,2026-11-11T13:03:05.910000Z,AS-IS,3,Etiquetar y apilar,7,5.73,camara
+sim-AS-IS-camara-8-1,2026-11-11T13:03:14.040000Z,AS-IS,1,Doblar hoja,8,8.13,camara
+sim-AS-IS-camara-8-2,2026-11-11T13:03:27.710000Z,AS-IS,2,Ensobrar y cerrar,8,13.67,camara
+sim-AS-IS-camara-8-3,2026-11-11T13:03:34.310000Z,AS-IS,3,Etiquetar y apilar,8,6.6,camara
+sim-AS-IS-camara-9-1,2026-11-11T13:03:42.040000Z,AS-IS,1,Doblar hoja,9,7.73,camara
+sim-AS-IS-camara-9-2,2026-11-11T13:03:53.310000Z,AS-IS,2,Ensobrar y cerrar,9,11.27,camara
+sim-AS-IS-camara-9-3,2026-11-11T13:03:59.780000Z,AS-IS,3,Etiquetar y apilar,9,6.47,camara
+sim-AS-IS-camara-10-1,2026-11-11T13:04:07.650000Z,AS-IS,1,Doblar hoja,10,7.87,camara
+sim-AS-IS-camara-10-2,2026-11-11T13:04:20.850000Z,AS-IS,2,Ensobrar y cerrar,10,13.2,camara
+sim-AS-IS-camara-10-3,2026-11-11T13:04:27.250000Z,AS-IS,3,Etiquetar y apilar,10,6.4,camara
+sim-AS-IS-camara-11-1,2026-11-11T13:04:33.920000Z,AS-IS,1,Doblar hoja,11,6.67,camara
+sim-AS-IS-camara-11-2,2026-11-11T13:04:46.190000Z,AS-IS,2,Ensobrar y cerrar,11,12.27,camara
+sim-AS-IS-camara-11-3,2026-11-11T13:04:52.990000Z,AS-IS,3,Etiquetar y apilar,11,6.8,camara
+sim-AS-IS-camara-12-1,2026-11-11T13:05:00.990000Z,AS-IS,1,Doblar hoja,12,8.0,camara
+sim-AS-IS-camara-12-2,2026-11-11T13:05:12.320000Z,AS-IS,2,Ensobrar y cerrar,12,11.33,camara
+sim-AS-IS-camara-12-3,2026-11-11T13:05:18.850000Z,AS-IS,3,Etiquetar y apilar,12,6.53,camara
+sim-AS-IS-camara-13-1,2026-11-11T13:05:26.380000Z,AS-IS,1,Doblar hoja,13,7.53,camara
+sim-AS-IS-camara-13-2,2026-11-11T13:05:37.650000Z,AS-IS,2,Ensobrar y cerrar,13,11.27,camara
+sim-AS-IS-camara-13-3,2026-11-11T13:05:44.050000Z,AS-IS,3,Etiquetar y apilar,13,6.4,camara
+sim-AS-IS-camara-14-1,2026-11-11T13:05:51.850000Z,AS-IS,1,Doblar hoja,14,7.8,camara
+sim-AS-IS-camara-14-2,2026-11-11T13:06:03.450000Z,AS-IS,2,Ensobrar y cerrar,14,11.6,camara
+sim-AS-IS-camara-14-3,2026-11-11T13:06:09.580000Z,AS-IS,3,Etiquetar y apilar,14,6.13,camara
+sim-AS-IS-camara-15-1,2026-11-11T13:06:17.250000Z,AS-IS,1,Doblar hoja,15,7.67,camara
+sim-AS-IS-camara-15-2,2026-11-11T13:06:30.050000Z,AS-IS,2,Ensobrar y cerrar,15,12.8,camara
+sim-AS-IS-camara-15-3,2026-11-11T13:06:36.580000Z,AS-IS,3,Etiquetar y apilar,15,6.53,camara
+sim-AS-IS-manual-1-1,2026-11-11T13:00:07.770000Z,AS-IS,1,Doblar hoja,1,7.77,manual
+sim-AS-IS-manual-1-2,2026-11-11T13:00:21.060000Z,AS-IS,2,Ensobrar y cerrar,1,13.29,manual
+sim-AS-IS-manual-1-3,2026-11-11T13:00:26.510000Z,AS-IS,3,Etiquetar y apilar,1,5.45,manual
+sim-AS-IS-manual-2-1,2026-11-11T13:00:34.670000Z,AS-IS,1,Doblar hoja,2,8.16,manual
+sim-AS-IS-manual-2-2,2026-11-11T13:00:48.120000Z,AS-IS,2,Ensobrar y cerrar,2,13.45,manual
+sim-AS-IS-manual-2-3,2026-11-11T13:00:54.320000Z,AS-IS,3,Etiquetar y apilar,2,6.2,manual
+sim-AS-IS-manual-3-1,2026-11-11T13:01:01.790000Z,AS-IS,1,Doblar hoja,3,7.47,manual
+sim-AS-IS-manual-3-2,2026-11-11T13:01:14.570000Z,AS-IS,2,Ensobrar y cerrar,3,12.78,manual
+sim-AS-IS-manual-3-3,2026-11-11T13:01:20.580000Z,AS-IS,3,Etiquetar y apilar,3,6.01,manual
+sim-AS-IS-manual-4-1,2026-11-11T13:01:28.200000Z,AS-IS,1,Doblar hoja,4,7.62,manual
+sim-AS-IS-manual-4-2,2026-11-11T13:01:41.060000Z,AS-IS,2,Ensobrar y cerrar,4,12.86,manual
+sim-AS-IS-manual-4-3,2026-11-11T13:01:49.450000Z,AS-IS,3,Etiquetar y apilar,4,8.39,manual
+sim-AS-IS-manual-5-1,2026-11-11T13:01:56.510000Z,AS-IS,1,Doblar hoja,5,7.06,manual
+sim-AS-IS-manual-5-2,2026-11-11T13:02:08.920000Z,AS-IS,2,Ensobrar y cerrar,5,12.41,manual
+sim-AS-IS-manual-5-3,2026-11-11T13:02:15.290000Z,AS-IS,3,Etiquetar y apilar,5,6.37,manual
+sim-AS-IS-manual-6-1,2026-11-11T13:02:22.320000Z,AS-IS,1,Doblar hoja,6,7.03,manual
+sim-AS-IS-manual-6-2,2026-11-11T13:02:34.170000Z,AS-IS,2,Ensobrar y cerrar,6,11.85,manual
+sim-AS-IS-manual-6-3,2026-11-11T13:02:40.610000Z,AS-IS,3,Etiquetar y apilar,6,6.44,manual
+sim-AS-IS-manual-7-1,2026-11-11T13:02:47.430000Z,AS-IS,1,Doblar hoja,7,6.82,manual
+sim-AS-IS-manual-7-2,2026-11-11T13:03:00.480000Z,AS-IS,2,Ensobrar y cerrar,7,13.05,manual
+sim-AS-IS-manual-7-3,2026-11-11T13:03:06.640000Z,AS-IS,3,Etiquetar y apilar,7,6.16,manual
+sim-AS-IS-manual-8-1,2026-11-11T13:03:14.540000Z,AS-IS,1,Doblar hoja,8,7.9,manual
+sim-AS-IS-manual-8-2,2026-11-11T13:03:28.450000Z,AS-IS,2,Ensobrar y cerrar,8,13.91,manual
+sim-AS-IS-manual-8-3,2026-11-11T13:03:34.140000Z,AS-IS,3,Etiquetar y apilar,8,5.69,manual
+sim-AS-IS-manual-9-1,2026-11-11T13:03:42.600000Z,AS-IS,1,Doblar hoja,9,8.46,manual
+sim-AS-IS-manual-9-2,2026-11-11T13:03:55.550000Z,AS-IS,2,Ensobrar y cerrar,9,12.95,manual
+sim-AS-IS-manual-9-3,2026-11-11T13:04:02.080000Z,AS-IS,3,Etiquetar y apilar,9,6.53,manual
+sim-AS-IS-manual-10-1,2026-11-11T13:04:09.520000Z,AS-IS,1,Doblar hoja,10,7.44,manual
+sim-AS-IS-manual-10-2,2026-11-11T13:04:22.740000Z,AS-IS,2,Ensobrar y cerrar,10,13.22,manual
+sim-AS-IS-manual-10-3,2026-11-11T13:04:29.490000Z,AS-IS,3,Etiquetar y apilar,10,6.75,manual
+sim-AS-IS-manual-11-1,2026-11-11T13:04:36.090000Z,AS-IS,1,Doblar hoja,11,6.6,manual
+sim-AS-IS-manual-11-2,2026-11-11T13:04:48.370000Z,AS-IS,2,Ensobrar y cerrar,11,12.28,manual
+sim-AS-IS-manual-11-3,2026-11-11T13:04:55.380000Z,AS-IS,3,Etiquetar y apilar,11,7.01,manual
+sim-AS-IS-manual-12-1,2026-11-11T13:05:02.900000Z,AS-IS,1,Doblar hoja,12,7.52,manual
+sim-AS-IS-manual-12-2,2026-11-11T13:05:14.450000Z,AS-IS,2,Ensobrar y cerrar,12,11.55,manual
+sim-AS-IS-manual-12-3,2026-11-11T13:05:20.980000Z,AS-IS,3,Etiquetar y apilar,12,6.53,manual
+sim-AS-IS-manual-13-1,2026-11-11T13:05:28.330000Z,AS-IS,1,Doblar hoja,13,7.35,manual
+sim-AS-IS-manual-13-2,2026-11-11T13:05:39.660000Z,AS-IS,2,Ensobrar y cerrar,13,11.33,manual
+sim-AS-IS-manual-13-3,2026-11-11T13:05:46.730000Z,AS-IS,3,Etiquetar y apilar,13,7.07,manual
+sim-AS-IS-manual-14-1,2026-11-11T13:05:53.640000Z,AS-IS,1,Doblar hoja,14,6.91,manual
+sim-AS-IS-manual-14-2,2026-11-11T13:06:05.280000Z,AS-IS,2,Ensobrar y cerrar,14,11.64,manual
+sim-AS-IS-manual-14-3,2026-11-11T13:06:12.140000Z,AS-IS,3,Etiquetar y apilar,14,6.86,manual
+sim-AS-IS-manual-15-1,2026-11-11T13:06:19.200000Z,AS-IS,1,Doblar hoja,15,7.06,manual
+sim-AS-IS-manual-15-2,2026-11-11T13:06:32.030000Z,AS-IS,2,Ensobrar y cerrar,15,12.83,manual
+sim-AS-IS-manual-15-3,2026-11-11T13:06:38.230000Z,AS-IS,3,Etiquetar y apilar,15,6.2,manual
+sim-AS-IS-video-1-1,2026-11-11T13:00:07.900000Z,AS-IS,1,Doblar hoja,1,7.9,video
+sim-AS-IS-video-1-2,2026-11-11T13:00:20.970000Z,AS-IS,2,Ensobrar y cerrar,1,13.07,video
+sim-AS-IS-video-1-3,2026-11-11T13:00:26.400000Z,AS-IS,3,Etiquetar y apilar,1,5.43,video
+sim-AS-IS-video-2-1,2026-11-11T13:00:34.270000Z,AS-IS,1,Doblar hoja,2,7.87,video
+sim-AS-IS-video-2-2,2026-11-11T13:00:47.670000Z,AS-IS,2,Ensobrar y cerrar,2,13.4,video
+sim-AS-IS-video-2-3,2026-11-11T13:00:54.240000Z,AS-IS,3,Etiquetar y apilar,2,6.57,video
+sim-AS-IS-video-3-1,2026-11-11T13:01:01.570000Z,AS-IS,1,Doblar hoja,3,7.33,video
+sim-AS-IS-video-3-2,2026-11-11T13:01:14.370000Z,AS-IS,2,Ensobrar y cerrar,3,12.8,video
+sim-AS-IS-video-3-3,2026-11-11T13:01:20.400000Z,AS-IS,3,Etiquetar y apilar,3,6.03,video
+sim-AS-IS-video-4-1,2026-11-11T13:01:27.900000Z,AS-IS,1,Doblar hoja,4,7.5,video
+sim-AS-IS-video-4-2,2026-11-11T13:01:41.170000Z,AS-IS,2,Ensobrar y cerrar,4,13.27,video
+sim-AS-IS-video-4-3,2026-11-11T13:01:48.500000Z,AS-IS,3,Etiquetar y apilar,4,7.33,video
+sim-AS-IS-video-5-1,2026-11-11T13:01:56.500000Z,AS-IS,1,Doblar hoja,5,8.0,video
+sim-AS-IS-video-5-2,2026-11-11T13:02:08.900000Z,AS-IS,2,Ensobrar y cerrar,5,12.4,video
+sim-AS-IS-video-5-3,2026-11-11T13:02:15.170000Z,AS-IS,3,Etiquetar y apilar,5,6.27,video
+sim-AS-IS-video-6-1,2026-11-11T13:02:22Z,AS-IS,1,Doblar hoja,6,6.83,video
+sim-AS-IS-video-6-2,2026-11-11T13:02:33.830000Z,AS-IS,2,Ensobrar y cerrar,6,11.83,video
+sim-AS-IS-video-6-3,2026-11-11T13:02:39.860000Z,AS-IS,3,Etiquetar y apilar,6,6.03,video
+sim-AS-IS-video-7-1,2026-11-11T13:02:46.830000Z,AS-IS,1,Doblar hoja,7,6.97,video
+sim-AS-IS-video-7-2,2026-11-11T13:03:00.230000Z,AS-IS,2,Ensobrar y cerrar,7,13.4,video
+sim-AS-IS-video-7-3,2026-11-11T13:03:06.100000Z,AS-IS,3,Etiquetar y apilar,7,5.87,video
+sim-AS-IS-video-8-1,2026-11-11T13:03:14.170000Z,AS-IS,1,Doblar hoja,8,8.07,video
+sim-AS-IS-video-8-2,2026-11-11T13:03:27.900000Z,AS-IS,2,Ensobrar y cerrar,8,13.73,video
+sim-AS-IS-video-8-3,2026-11-11T13:03:34.230000Z,AS-IS,3,Etiquetar y apilar,8,6.33,video
+sim-AS-IS-video-9-1,2026-11-11T13:03:42.160000Z,AS-IS,1,Doblar hoja,9,7.93,video
+sim-AS-IS-video-9-2,2026-11-11T13:03:53.360000Z,AS-IS,2,Ensobrar y cerrar,9,11.2,video
+sim-AS-IS-video-9-3,2026-11-11T13:03:59.930000Z,AS-IS,3,Etiquetar y apilar,9,6.57,video
+sim-AS-IS-video-10-1,2026-11-11T13:04:07.630000Z,AS-IS,1,Doblar hoja,10,7.7,video
+sim-AS-IS-video-10-2,2026-11-11T13:04:20.930000Z,AS-IS,2,Ensobrar y cerrar,10,13.3,video
+sim-AS-IS-video-10-3,2026-11-11T13:04:27.300000Z,AS-IS,3,Etiquetar y apilar,10,6.37,video
+sim-AS-IS-video-11-1,2026-11-11T13:04:34.100000Z,AS-IS,1,Doblar hoja,11,6.8,video
+sim-AS-IS-video-11-2,2026-11-11T13:04:46.200000Z,AS-IS,2,Ensobrar y cerrar,11,12.1,video
+sim-AS-IS-video-11-3,2026-11-11T13:04:53Z,AS-IS,3,Etiquetar y apilar,11,6.8,video
+sim-AS-IS-video-12-1,2026-11-11T13:05:00.930000Z,AS-IS,1,Doblar hoja,12,7.93,video
+sim-AS-IS-video-12-2,2026-11-11T13:05:12.330000Z,AS-IS,2,Ensobrar y cerrar,12,11.4,video
+sim-AS-IS-video-12-3,2026-11-11T13:05:18.800000Z,AS-IS,3,Etiquetar y apilar,12,6.47,video
+sim-AS-IS-video-13-1,2026-11-11T13:05:26.270000Z,AS-IS,1,Doblar hoja,13,7.47,video
+sim-AS-IS-video-13-2,2026-11-11T13:05:37.840000Z,AS-IS,2,Ensobrar y cerrar,13,11.57,video
+sim-AS-IS-video-13-3,2026-11-11T13:05:44.210000Z,AS-IS,3,Etiquetar y apilar,13,6.37,video
+sim-AS-IS-video-14-1,2026-11-11T13:05:51.910000Z,AS-IS,1,Doblar hoja,14,7.7,video
+sim-AS-IS-video-14-2,2026-11-11T13:06:03.440000Z,AS-IS,2,Ensobrar y cerrar,14,11.53,video
+sim-AS-IS-video-14-3,2026-11-11T13:06:09.640000Z,AS-IS,3,Etiquetar y apilar,14,6.2,video
+sim-AS-IS-video-15-1,2026-11-11T13:06:17.210000Z,AS-IS,1,Doblar hoja,15,7.57,video
+sim-AS-IS-video-15-2,2026-11-11T13:06:30.080000Z,AS-IS,2,Ensobrar y cerrar,15,12.87,video
+sim-AS-IS-video-15-3,2026-11-11T13:06:36.650000Z,AS-IS,3,Etiquetar y apilar,15,6.57,video
+sim-TO-BE-camara-1-1,2026-11-11T13:40:06.870000Z,TO-BE,1,Doblar hoja,1,6.87,camara
+sim-TO-BE-camara-1-2,2026-11-11T13:40:15.600000Z,TO-BE,2,Ensobrar y cerrar,1,8.73,camara
+sim-TO-BE-camara-1-3,2026-11-11T13:40:21.670000Z,TO-BE,3,Etiquetar y apilar,1,6.07,camara
+sim-TO-BE-camara-2-1,2026-11-11T13:40:29.140000Z,TO-BE,1,Doblar hoja,2,7.47,camara
+sim-TO-BE-camara-2-2,2026-11-11T13:40:39.210000Z,TO-BE,2,Ensobrar y cerrar,2,10.07,camara
+sim-TO-BE-camara-2-3,2026-11-11T13:40:44.880000Z,TO-BE,3,Etiquetar y apilar,2,5.67,camara
+sim-TO-BE-camara-3-1,2026-11-11T13:40:52.410000Z,TO-BE,1,Doblar hoja,3,7.53,camara
+sim-TO-BE-camara-3-2,2026-11-11T13:41:01.280000Z,TO-BE,2,Ensobrar y cerrar,3,8.87,camara
+sim-TO-BE-camara-3-3,2026-11-11T13:41:06.950000Z,TO-BE,3,Etiquetar y apilar,3,5.67,camara
+sim-TO-BE-camara-4-1,2026-11-11T13:41:13.880000Z,TO-BE,1,Doblar hoja,4,6.93,camara
+sim-TO-BE-camara-4-2,2026-11-11T13:41:23.550000Z,TO-BE,2,Ensobrar y cerrar,4,9.67,camara
+sim-TO-BE-camara-4-3,2026-11-11T13:41:28.550000Z,TO-BE,3,Etiquetar y apilar,4,5.0,camara
+sim-TO-BE-camara-5-1,2026-11-11T13:41:35.880000Z,TO-BE,1,Doblar hoja,5,7.33,camara
+sim-TO-BE-camara-5-2,2026-11-11T13:41:45.210000Z,TO-BE,2,Ensobrar y cerrar,5,9.33,camara
+sim-TO-BE-camara-5-3,2026-11-11T13:41:51.480000Z,TO-BE,3,Etiquetar y apilar,5,6.27,camara
+sim-TO-BE-camara-6-1,2026-11-11T13:41:59.280000Z,TO-BE,1,Doblar hoja,6,7.8,camara
+sim-TO-BE-camara-6-2,2026-11-11T13:42:08.950000Z,TO-BE,2,Ensobrar y cerrar,6,9.67,camara
+sim-TO-BE-camara-6-3,2026-11-11T13:42:14.880000Z,TO-BE,3,Etiquetar y apilar,6,5.93,camara
+sim-TO-BE-camara-7-1,2026-11-11T13:42:22.410000Z,TO-BE,1,Doblar hoja,7,7.53,camara
+sim-TO-BE-camara-7-2,2026-11-11T13:42:31.940000Z,TO-BE,2,Ensobrar y cerrar,7,9.53,camara
+sim-TO-BE-camara-7-3,2026-11-11T13:42:37.870000Z,TO-BE,3,Etiquetar y apilar,7,5.93,camara
+sim-TO-BE-camara-8-1,2026-11-11T13:42:44.800000Z,TO-BE,1,Doblar hoja,8,6.93,camara
+sim-TO-BE-camara-8-2,2026-11-11T13:42:53.070000Z,TO-BE,2,Ensobrar y cerrar,8,8.27,camara
+sim-TO-BE-camara-8-3,2026-11-11T13:42:58.740000Z,TO-BE,3,Etiquetar y apilar,8,5.67,camara
+sim-TO-BE-camara-9-1,2026-11-11T13:43:05.940000Z,TO-BE,1,Doblar hoja,9,7.2,camara
+sim-TO-BE-camara-9-2,2026-11-11T13:43:16.470000Z,TO-BE,2,Ensobrar y cerrar,9,10.53,camara
+sim-TO-BE-camara-9-3,2026-11-11T13:43:21.340000Z,TO-BE,3,Etiquetar y apilar,9,4.87,camara
+sim-TO-BE-camara-10-1,2026-11-11T13:43:29.010000Z,TO-BE,1,Doblar hoja,10,7.67,camara
+sim-TO-BE-camara-10-2,2026-11-11T13:43:37.810000Z,TO-BE,2,Ensobrar y cerrar,10,8.8,camara
+sim-TO-BE-camara-10-3,2026-11-11T13:43:43.480000Z,TO-BE,3,Etiquetar y apilar,10,5.67,camara
+sim-TO-BE-camara-11-1,2026-11-11T13:43:51.210000Z,TO-BE,1,Doblar hoja,11,7.73,camara
+sim-TO-BE-camara-11-2,2026-11-11T13:44:00.410000Z,TO-BE,2,Ensobrar y cerrar,11,9.2,camara
+sim-TO-BE-camara-11-3,2026-11-11T13:44:05.410000Z,TO-BE,3,Etiquetar y apilar,11,5.0,camara
+sim-TO-BE-camara-12-1,2026-11-11T13:44:12.740000Z,TO-BE,1,Doblar hoja,12,7.33,camara
+sim-TO-BE-camara-12-2,2026-11-11T13:44:20.070000Z,TO-BE,2,Ensobrar y cerrar,12,7.33,camara
+sim-TO-BE-camara-12-3,2026-11-11T13:44:25.740000Z,TO-BE,3,Etiquetar y apilar,12,5.67,camara
+sim-TO-BE-camara-13-1,2026-11-11T13:44:33.070000Z,TO-BE,1,Doblar hoja,13,7.33,camara
+sim-TO-BE-camara-13-2,2026-11-11T13:44:42.070000Z,TO-BE,2,Ensobrar y cerrar,13,9.0,camara
+sim-TO-BE-camara-13-3,2026-11-11T13:44:47.600000Z,TO-BE,3,Etiquetar y apilar,13,5.53,camara
+sim-TO-BE-camara-14-1,2026-11-11T13:44:55Z,TO-BE,1,Doblar hoja,14,7.4,camara
+sim-TO-BE-camara-14-2,2026-11-11T13:45:04.330000Z,TO-BE,2,Ensobrar y cerrar,14,9.33,camara
+sim-TO-BE-camara-14-3,2026-11-11T13:45:09.530000Z,TO-BE,3,Etiquetar y apilar,14,5.2,camara
+sim-TO-BE-camara-15-1,2026-11-11T13:45:17.130000Z,TO-BE,1,Doblar hoja,15,7.6,camara
+sim-TO-BE-camara-15-2,2026-11-11T13:45:26.660000Z,TO-BE,2,Ensobrar y cerrar,15,9.53,camara
+sim-TO-BE-camara-15-3,2026-11-11T13:45:32.990000Z,TO-BE,3,Etiquetar y apilar,15,6.33,camara
+sim-TO-BE-manual-1-1,2026-11-11T13:40:07.500000Z,TO-BE,1,Doblar hoja,1,7.5,manual
+sim-TO-BE-manual-1-2,2026-11-11T13:40:15.840000Z,TO-BE,2,Ensobrar y cerrar,1,8.34,manual
+sim-TO-BE-manual-1-3,2026-11-11T13:40:21.510000Z,TO-BE,3,Etiquetar y apilar,1,5.67,manual
+sim-TO-BE-manual-2-1,2026-11-11T13:40:28.920000Z,TO-BE,1,Doblar hoja,2,7.41,manual
+sim-TO-BE-manual-2-2,2026-11-11T13:40:39.230000Z,TO-BE,2,Ensobrar y cerrar,2,10.31,manual
+sim-TO-BE-manual-2-3,2026-11-11T13:40:44.760000Z,TO-BE,3,Etiquetar y apilar,2,5.53,manual
+sim-TO-BE-manual-3-1,2026-11-11T13:40:52.220000Z,TO-BE,1,Doblar hoja,3,7.46,manual
+sim-TO-BE-manual-3-2,2026-11-11T13:41:01.290000Z,TO-BE,2,Ensobrar y cerrar,3,9.07,manual
+sim-TO-BE-manual-3-3,2026-11-11T13:41:07.090000Z,TO-BE,3,Etiquetar y apilar,3,5.8,manual
+sim-TO-BE-manual-4-1,2026-11-11T13:41:14.020000Z,TO-BE,1,Doblar hoja,4,6.93,manual
+sim-TO-BE-manual-4-2,2026-11-11T13:41:23.080000Z,TO-BE,2,Ensobrar y cerrar,4,9.06,manual
+sim-TO-BE-manual-4-3,2026-11-11T13:41:28.940000Z,TO-BE,3,Etiquetar y apilar,4,5.86,manual
+sim-TO-BE-manual-5-1,2026-11-11T13:41:35.800000Z,TO-BE,1,Doblar hoja,5,6.86,manual
+sim-TO-BE-manual-5-2,2026-11-11T13:41:44.930000Z,TO-BE,2,Ensobrar y cerrar,5,9.13,manual
+sim-TO-BE-manual-5-3,2026-11-11T13:41:52.070000Z,TO-BE,3,Etiquetar y apilar,5,7.14,manual
+sim-TO-BE-manual-6-1,2026-11-11T13:42:01.240000Z,TO-BE,1,Doblar hoja,6,9.17,manual
+sim-TO-BE-manual-6-2,2026-11-11T13:42:11.210000Z,TO-BE,2,Ensobrar y cerrar,6,9.97,manual
+sim-TO-BE-manual-6-3,2026-11-11T13:42:16.640000Z,TO-BE,3,Etiquetar y apilar,6,5.43,manual
+sim-TO-BE-manual-7-1,2026-11-11T13:42:24.400000Z,TO-BE,1,Doblar hoja,7,7.76,manual
+sim-TO-BE-manual-7-2,2026-11-11T13:42:33.580000Z,TO-BE,2,Ensobrar y cerrar,7,9.18,manual
+sim-TO-BE-manual-7-3,2026-11-11T13:42:39.890000Z,TO-BE,3,Etiquetar y apilar,7,6.31,manual
+sim-TO-BE-manual-8-1,2026-11-11T13:42:46.610000Z,TO-BE,1,Doblar hoja,8,6.72,manual
+sim-TO-BE-manual-8-2,2026-11-11T13:42:55.140000Z,TO-BE,2,Ensobrar y cerrar,8,8.53,manual
+sim-TO-BE-manual-8-3,2026-11-11T13:43:01.060000Z,TO-BE,3,Etiquetar y apilar,8,5.92,manual
+sim-TO-BE-manual-9-1,2026-11-11T13:43:08.030000Z,TO-BE,1,Doblar hoja,9,6.97,manual
+sim-TO-BE-manual-9-2,2026-11-11T13:43:17.800000Z,TO-BE,2,Ensobrar y cerrar,9,9.77,manual
+sim-TO-BE-manual-9-3,2026-11-11T13:43:23.370000Z,TO-BE,3,Etiquetar y apilar,9,5.57,manual
+sim-TO-BE-manual-10-1,2026-11-11T13:43:30.880000Z,TO-BE,1,Doblar hoja,10,7.51,manual
+sim-TO-BE-manual-10-2,2026-11-11T13:43:39.450000Z,TO-BE,2,Ensobrar y cerrar,10,8.57,manual
+sim-TO-BE-manual-10-3,2026-11-11T13:43:45.330000Z,TO-BE,3,Etiquetar y apilar,10,5.88,manual
+sim-TO-BE-manual-11-1,2026-11-11T13:43:53.140000Z,TO-BE,1,Doblar hoja,11,7.81,manual
+sim-TO-BE-manual-11-2,2026-11-11T13:44:02.400000Z,TO-BE,2,Ensobrar y cerrar,11,9.26,manual
+sim-TO-BE-manual-11-3,2026-11-11T13:44:07.480000Z,TO-BE,3,Etiquetar y apilar,11,5.08,manual
+sim-TO-BE-manual-12-1,2026-11-11T13:44:14.660000Z,TO-BE,1,Doblar hoja,12,7.18,manual
+sim-TO-BE-manual-12-2,2026-11-11T13:44:22.180000Z,TO-BE,2,Ensobrar y cerrar,12,7.52,manual
+sim-TO-BE-manual-12-3,2026-11-11T13:44:28.300000Z,TO-BE,3,Etiquetar y apilar,12,6.12,manual
+sim-TO-BE-manual-13-1,2026-11-11T13:44:35.270000Z,TO-BE,1,Doblar hoja,13,6.97,manual
+sim-TO-BE-manual-13-2,2026-11-11T13:44:44.030000Z,TO-BE,2,Ensobrar y cerrar,13,8.76,manual
+sim-TO-BE-manual-13-3,2026-11-11T13:44:49.740000Z,TO-BE,3,Etiquetar y apilar,13,5.71,manual
+sim-TO-BE-manual-14-1,2026-11-11T13:44:56.760000Z,TO-BE,1,Doblar hoja,14,7.02,manual
+sim-TO-BE-manual-14-2,2026-11-11T13:45:05.740000Z,TO-BE,2,Ensobrar y cerrar,14,8.98,manual
+sim-TO-BE-manual-14-3,2026-11-11T13:45:11.680000Z,TO-BE,3,Etiquetar y apilar,14,5.94,manual
+sim-TO-BE-manual-15-1,2026-11-11T13:45:18.380000Z,TO-BE,1,Doblar hoja,15,6.7,manual
+sim-TO-BE-manual-15-2,2026-11-11T13:45:29.100000Z,TO-BE,2,Ensobrar y cerrar,15,10.72,manual
+sim-TO-BE-manual-15-3,2026-11-11T13:45:35.200000Z,TO-BE,3,Etiquetar y apilar,15,6.1,manual
+sim-TO-BE-video-1-1,2026-11-11T13:40:06.900000Z,TO-BE,1,Doblar hoja,1,6.9,video
+sim-TO-BE-video-1-2,2026-11-11T13:40:15.830000Z,TO-BE,2,Ensobrar y cerrar,1,8.93,video
+sim-TO-BE-video-1-3,2026-11-11T13:40:21.600000Z,TO-BE,3,Etiquetar y apilar,1,5.77,video
+sim-TO-BE-video-2-1,2026-11-11T13:40:29.170000Z,TO-BE,1,Doblar hoja,2,7.57,video
+sim-TO-BE-video-2-2,2026-11-11T13:40:39.240000Z,TO-BE,2,Ensobrar y cerrar,2,10.07,video
+sim-TO-BE-video-2-3,2026-11-11T13:40:45.010000Z,TO-BE,3,Etiquetar y apilar,2,5.77,video
+sim-TO-BE-video-3-1,2026-11-11T13:40:52.280000Z,TO-BE,1,Doblar hoja,3,7.27,video
+sim-TO-BE-video-3-2,2026-11-11T13:41:01.310000Z,TO-BE,2,Ensobrar y cerrar,3,9.03,video
+sim-TO-BE-video-3-3,2026-11-11T13:41:07.010000Z,TO-BE,3,Etiquetar y apilar,3,5.7,video
+sim-TO-BE-video-4-1,2026-11-11T13:41:13.940000Z,TO-BE,1,Doblar hoja,4,6.93,video
+sim-TO-BE-video-4-2,2026-11-11T13:41:23.470000Z,TO-BE,2,Ensobrar y cerrar,4,9.53,video
+sim-TO-BE-video-4-3,2026-11-11T13:41:28.570000Z,TO-BE,3,Etiquetar y apilar,4,5.1,video
+sim-TO-BE-video-5-1,2026-11-11T13:41:35.900000Z,TO-BE,1,Doblar hoja,5,7.33,video
+sim-TO-BE-video-5-2,2026-11-11T13:41:45.400000Z,TO-BE,2,Ensobrar y cerrar,5,9.5,video
+sim-TO-BE-video-5-3,2026-11-11T13:41:51.730000Z,TO-BE,3,Etiquetar y apilar,5,6.33,video
+sim-TO-BE-video-6-1,2026-11-11T13:41:59.200000Z,TO-BE,1,Doblar hoja,6,7.47,video
+sim-TO-BE-video-6-2,2026-11-11T13:42:09.200000Z,TO-BE,2,Ensobrar y cerrar,6,10.0,video
+sim-TO-BE-video-6-3,2026-11-11T13:42:14.730000Z,TO-BE,3,Etiquetar y apilar,6,5.53,video
+sim-TO-BE-video-7-1,2026-11-11T13:42:22.430000Z,TO-BE,1,Doblar hoja,7,7.7,video
+sim-TO-BE-video-7-2,2026-11-11T13:42:31.830000Z,TO-BE,2,Ensobrar y cerrar,7,9.4,video
+sim-TO-BE-video-7-3,2026-11-11T13:42:37.960000Z,TO-BE,3,Etiquetar y apilar,7,6.13,video
+sim-TO-BE-video-8-1,2026-11-11T13:42:44.960000Z,TO-BE,1,Doblar hoja,8,7.0,video
+sim-TO-BE-video-8-2,2026-11-11T13:42:53.330000Z,TO-BE,2,Ensobrar y cerrar,8,8.37,video
+sim-TO-BE-video-8-3,2026-11-11T13:42:58.860000Z,TO-BE,3,Etiquetar y apilar,8,5.53,video
+sim-TO-BE-video-9-1,2026-11-11T13:43:05.990000Z,TO-BE,1,Doblar hoja,9,7.13,video
+sim-TO-BE-video-9-2,2026-11-11T13:43:16.290000Z,TO-BE,2,Ensobrar y cerrar,9,10.3,video
+sim-TO-BE-video-9-3,2026-11-11T13:43:21.520000Z,TO-BE,3,Etiquetar y apilar,9,5.23,video
+sim-TO-BE-video-10-1,2026-11-11T13:43:28.990000Z,TO-BE,1,Doblar hoja,10,7.47,video
+sim-TO-BE-video-10-2,2026-11-11T13:43:37.890000Z,TO-BE,2,Ensobrar y cerrar,10,8.9,video
+sim-TO-BE-video-10-3,2026-11-11T13:43:43.620000Z,TO-BE,3,Etiquetar y apilar,10,5.73,video
+sim-TO-BE-video-11-1,2026-11-11T13:43:51.250000Z,TO-BE,1,Doblar hoja,11,7.63,video
+sim-TO-BE-video-11-2,2026-11-11T13:44:00.320000Z,TO-BE,2,Ensobrar y cerrar,11,9.07,video
+sim-TO-BE-video-11-3,2026-11-11T13:44:05.550000Z,TO-BE,3,Etiquetar y apilar,11,5.23,video
+sim-TO-BE-video-12-1,2026-11-11T13:44:12.620000Z,TO-BE,1,Doblar hoja,12,7.07,video
+sim-TO-BE-video-12-2,2026-11-11T13:44:20.220000Z,TO-BE,2,Ensobrar y cerrar,12,7.6,video
+sim-TO-BE-video-12-3,2026-11-11T13:44:25.890000Z,TO-BE,3,Etiquetar y apilar,12,5.67,video
+sim-TO-BE-video-13-1,2026-11-11T13:44:33.120000Z,TO-BE,1,Doblar hoja,13,7.23,video
+sim-TO-BE-video-13-2,2026-11-11T13:44:42.120000Z,TO-BE,2,Ensobrar y cerrar,13,9.0,video
+sim-TO-BE-video-13-3,2026-11-11T13:44:47.990000Z,TO-BE,3,Etiquetar y apilar,13,5.87,video
+sim-TO-BE-video-14-1,2026-11-11T13:44:55.160000Z,TO-BE,1,Doblar hoja,14,7.17,video
+sim-TO-BE-video-14-2,2026-11-11T13:45:04.430000Z,TO-BE,2,Ensobrar y cerrar,14,9.27,video
+sim-TO-BE-video-14-3,2026-11-11T13:45:09.730000Z,TO-BE,3,Etiquetar y apilar,14,5.3,video
+sim-TO-BE-video-15-1,2026-11-11T13:45:17.030000Z,TO-BE,1,Doblar hoja,15,7.3,video
+sim-TO-BE-video-15-2,2026-11-11T13:45:26.930000Z,TO-BE,2,Ensobrar y cerrar,15,9.9,video
+sim-TO-BE-video-15-3,2026-11-11T13:45:32.930000Z,TO-BE,3,Etiquetar y apilar,15,6.0,video
