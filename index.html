@@ -1,0 +1,1047 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>OptiTime Vision</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: aplicación de ingeniería de métodos — barra lateral oscura con el estudio y la navegación, área de trabajo clara con paneles de cabecera y cifras en monoespaciada */
+:root{
+  --bg:#F3F5F6; --surface:#FFFFFF; --surface-2:#F6F8F8; --sunken:#E7ECED; --ink:#14232B; --ink-2:#55656D; --ink-3:#7B8A90; --line:#D8DFE1; --line-2:#E9EEEF;
+  --accent:#0B6E69; --accent-hover:#085954; --accent-ink:#FFFFFF; --accent-soft:#DDEFEC;
+  --good:#1D7838; --good-soft:#E1F1E5; --bad:#B42318; --bad-soft:#FBE8E5; --warn:#8A5A06; --warn-soft:#FBF0DA; --info:#1E5B8C; --info-soft:#E7F0F8;
+  --side:#0F1D25; --side-2:#182C36; --side-ink:#C9D6D9; --side-ink-2:#869BA2; --side-strong:#FFFFFF; --side-accent:#5CC9BF;
+  --stage:#0B1316; --stage-ink:#DCE7E6; --key-ink:#FFFFFF;
+  --a1:#0E7C86; --a2:#C66A12; --a3:#6A4CC0; --a4:#C23A6A; --a5:#2E69C2;
+  --shadow:0 1px 2px rgba(15,29,37,.06);
+  --font-b:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-d:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-m:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1114; --surface:#111B20; --surface-2:#16232A; --sunken:#0C1518; --ink:#E2EBEC; --ink-2:#9DB0B4; --ink-3:#71858B; --line:#24343B; --line-2:#1A282E;
+  --accent:#3DB6AC; --accent-hover:#58C6BC; --accent-ink:#04201E; --accent-soft:#12332F;
+  --good:#5CC274; --good-soft:#12301B; --bad:#F07063; --bad-soft:#3A1C19; --warn:#E3A93E; --warn-soft:#33270F; --info:#80B3DE; --info-soft:#132535;
+  --side:#070D10; --side-2:#13252D; --side-ink:#C9D6D9; --side-ink-2:#7F949A; --side-strong:#FFFFFF; --side-accent:#5CC9BF;
+  --stage:#05090B; --stage-ink:#DCE7E6; --key-ink:#071014;
+  --a1:#2FB3BE; --a2:#EE9442; --a3:#9B82EC; --a4:#EC6A98; --a5:#5E97EE;
+  --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1114; --surface:#111B20; --surface-2:#16232A; --sunken:#0C1518; --ink:#E2EBEC; --ink-2:#9DB0B4; --ink-3:#71858B; --line:#24343B; --line-2:#1A282E;
+  --accent:#3DB6AC; --accent-hover:#58C6BC; --accent-ink:#04201E; --accent-soft:#12332F;
+  --good:#5CC274; --good-soft:#12301B; --bad:#F07063; --bad-soft:#3A1C19; --warn:#E3A93E; --warn-soft:#33270F; --info:#80B3DE; --info-soft:#132535;
+  --side:#070D10; --side-2:#13252D; --side-ink:#C9D6D9; --side-ink-2:#7F949A; --side-strong:#FFFFFF; --side-accent:#5CC9BF;
+  --stage:#05090B; --stage-ink:#DCE7E6; --key-ink:#071014;
+  --a1:#2FB3BE; --a2:#EE9442; --a3:#9B82EC; --a4:#EC6A98; --a5:#5E97EE;
+  --shadow:none; color-scheme:dark}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-b);font-weight:600;line-height:1.25;text-wrap:balance;margin:0}
+p{margin:0}
+.num,.mono{font-family:var(--font-m);font-variant-numeric:tabular-nums}
+.muted{color:var(--ink-2)}
+.small{font-size:12.5px}
+.label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.err{color:var(--bad);font-size:13px;margin-top:10px}
+
+/* ---------- shell ---------- */
+.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+.side{background:var(--side);color:var(--side-ink);border-right:1px solid var(--side-2)}
+.side-in{position:sticky;top:0;display:flex;flex-direction:column;gap:22px;min-height:100vh;box-sizing:border-box;padding-block:20px;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:14px}
+.brand{display:flex;align-items:center;gap:10px;padding:0 6px}
+.brand-mark{width:34px;height:34px;border-radius:9px;background:var(--side-accent);color:var(--side);display:grid;place-items:center;flex:none}
+.brand strong{display:block;font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--side-strong);line-height:1.1}
+.brand strong+span{display:block;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--side-accent)}
+.side-label{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--side-ink-2)}
+.study{display:grid;gap:4px;padding:12px;border-radius:9px;background:var(--side-2)}
+.side .study input{height:32px;background:transparent;border:1px solid transparent;color:var(--side-strong);font:600 14px var(--font-b);padding:0 6px;margin:0 -6px;border-radius:6px;box-shadow:none}
+.side .study input:hover{border-color:rgba(255,255,255,.14)}
+.side .study input:focus{border-color:var(--side-accent);outline:none}
+.side-meta{font-size:12px;color:var(--side-ink-2);line-height:1.4}
+.nav-h{padding:0 8px;margin-bottom:6px}
+.tabs{display:grid;gap:2px}
+.tabs button{display:flex;align-items:center;gap:11px;width:100%;font:500 14px var(--font-b);padding:9px 10px;border:0;border-radius:7px;background:none;color:var(--side-ink-2);cursor:pointer;text-align:left}
+.tabs button svg{flex:none}
+.tabs button:hover{background:rgba(255,255,255,.05);color:var(--side-ink)}
+.tabs button[aria-selected="true"]{background:var(--side-2);color:var(--side-strong)}
+.tabs button[aria-selected="true"] svg{color:var(--side-accent)}
+.nav-count{margin-left:auto;font:500 11px var(--font-m);padding:1px 7px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--side-ink)}
+.nav-count:empty{display:none}
+.side-foot{margin-top:auto;display:grid;gap:12px;font-size:12px;line-height:1.45;color:var(--side-ink-2);padding:0 8px}
+.priv{display:flex;gap:9px;align-items:flex-start;padding:10px;border:1px solid var(--side-2);border-radius:8px}
+.priv svg{flex:none;color:var(--side-accent);margin-top:1px}
+
+.main{min-width:0;width:100%;max-width:1320px;box-sizing:border-box;display:grid;gap:18px;align-content:start;padding-block:26px 56px;padding-left:32px;padding-right:max(32px,env(safe-area-inset-right,0px))}
+.page-h{display:flex;justify-content:space-between;align-items:flex-end;gap:14px 20px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.crumb{font-size:12.5px;font-weight:500;color:var(--ink-3)}
+.page-h h1{font-size:25px;letter-spacing:-.015em;margin-top:3px}
+.sub{color:var(--ink-2);margin-top:3px}
+.scen{display:flex;align-items:center;gap:10px}
+
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--side)}
+  .side{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;border-right:0;border-bottom:1px solid var(--side-2)}
+  .side-in{position:static;min-height:0;gap:8px;padding-block:12px 0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .brand{padding:0}
+  .brand-mark{width:28px;height:28px;border-radius:7px}
+  .side-extra{display:none}
+  .tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin:0 -6px}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{width:auto;white-space:nowrap;padding:8px 10px 11px;border-radius:0;border-bottom:2px solid transparent;background:none}
+  .tabs button:hover{background:none}
+  .tabs button[aria-selected="true"]{background:none;border-bottom-color:var(--side-accent)}
+  .tabs button svg{display:none}
+  .main{padding-block:18px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .page-h h1{font-size:22px}
+}
+
+/* ---------- panels ---------- */
+section.tab{display:grid;gap:18px;min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);min-width:0;overflow:hidden}
+.ph{display:flex;align-items:center;justify-content:space-between;gap:10px 12px;flex-wrap:wrap;min-height:54px;box-sizing:border-box;padding:10px 16px;border-bottom:1px solid var(--line-2)}
+.ph h2{font-size:15px;letter-spacing:-.005em}
+.ph-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pb{padding:16px}
+.pf{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--line-2);background:var(--surface-2)}
+.grid2{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(300px,1fr);gap:18px;align-items:start}
+.col{display:grid;gap:18px;min-width:0}
+.grid-even{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;align-items:start}
+@media (max-width:1100px){.grid2{grid-template-columns:minmax(0,1fr)}}
+
+.notice{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 12px 10px 14px;border-radius:10px;background:var(--info-soft);border:1px solid var(--line)}
+.notice p{display:flex;gap:10px;align-items:flex-start;min-width:0;flex:1 1 320px}
+.notice svg{flex:none;color:var(--info);margin-top:2px}
+.alert{padding:9px 12px;border-radius:8px;background:var(--warn-soft);color:var(--ink);font-size:13px;margin:0 0 12px}
+.empty{padding:22px;text-align:center;color:var(--ink-2);border:1px dashed var(--line);border-radius:8px;white-space:normal}
+
+/* ---------- controls ---------- */
+.btn{font:500 13.5px var(--font-b);height:34px;box-sizing:border-box;padding:0 14px;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;box-shadow:var(--shadow);line-height:1}
+.btn:hover{background:var(--sunken)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+.btn.danger{color:var(--bad)}
+.btn.rec{background:var(--bad);border-color:var(--bad);color:var(--key-ink)}
+.btn.sm{height:28px;padding:0 10px;font-size:12.5px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn svg{flex:none}
+button:focus-visible,input:focus-visible,select:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type="text"],input[type="number"],select{font:14px var(--font-b);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:7px;height:34px;box-sizing:border-box;padding:0 10px;min-width:0}
+input[type="number"]{font-family:var(--font-m)}
+input[type="text"]:focus,input[type="number"]:focus,select:focus{border-color:var(--accent);outline:3px solid var(--accent-soft);outline-offset:0}
+input[type="checkbox"]{accent-color:var(--accent);width:16px;height:16px;margin:0}
+label.f{display:grid;gap:5px;font-size:12.5px;font-weight:500;color:var(--ink-2);min-width:0}
+.check{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-2);min-height:34px;cursor:pointer}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end}
+.seg{display:inline-flex;padding:3px;border-radius:8px;background:var(--sunken);gap:2px}
+.seg button{font:600 13px var(--font-b);height:28px;padding:0 12px;border:0;border-radius:6px;background:transparent;color:var(--ink-2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.14)}
+#scenSeg button{padding:0 16px}
+#scenSeg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:24px;box-sizing:border-box;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:500;background:var(--sunken);color:var(--ink-2);white-space:nowrap}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.pill.ok{color:var(--good);background:var(--good-soft)}
+.pill.bad{color:var(--bad);background:var(--bad-soft)}
+.pill.warn{color:var(--warn);background:var(--warn-soft)}
+.pill.live{color:var(--bad);background:var(--bad-soft);font-weight:600}
+.pill.live .dot{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+
+/* ---------- capture ---------- */
+.stage{position:relative;border-radius:8px;overflow:hidden;background:var(--stage)}
+.stage canvas{display:block;width:100%;height:auto;max-width:100%;touch-action:none}
+.stage.editing canvas{cursor:crosshair}
+.stage-msg{position:absolute;left:12px;right:12px;bottom:12px;color:var(--stage-ink);background:rgba(4,10,12,.72);border-radius:7px;padding:9px 12px;font-size:13px;line-height:1.45}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.toolbar .check{margin-left:auto}
+.adv{margin-top:14px;border-top:1px solid var(--line-2);padding-top:12px}
+.adv summary{cursor:pointer;font-weight:600;font-size:13px;color:var(--ink-2)}
+.adv .fields{margin-top:12px}
+.adv p{margin-top:10px}
+.curact{display:flex;align-items:center;gap:8px;font-weight:600;min-height:24px}
+.curact .sw{width:12px;height:12px}
+.clock{font:500 54px/1 var(--font-m);font-variant-numeric:tabular-nums;letter-spacing:-.03em;margin-top:10px}
+.clock .unit{font-size:16px;letter-spacing:0;color:var(--ink-3);margin-left:6px}
+.cycle{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:12px;border-top:1px solid var(--line-2)}
+.cycle .num{font-size:18px;font-weight:600;min-width:2.4ch;text-align:center}
+.acts{display:grid;gap:8px}
+.act{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center}
+.key{font:600 12px var(--font-m);width:26px;height:26px;border-radius:6px;display:grid;place-items:center;color:var(--key-ink);flex:none}
+.sw{width:10px;height:10px;border-radius:3px;flex:none;display:inline-block}
+.pad{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.padbtn{font:600 15px var(--font-b);text-align:left;padding:14px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;gap:12px;min-height:104px;box-shadow:var(--shadow)}
+.padbtn:hover{border-color:var(--ink-3)}
+.padbtn[aria-pressed="true"]{border-color:currentColor;box-shadow:0 0 0 3px var(--accent-soft)}
+.padbtn .key{width:30px;height:30px;font-size:14px}
+.recent{display:grid;font-size:13px}
+.recent>div{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 16px;border-bottom:1px solid var(--line-2)}
+.recent>div:last-child{border-bottom:0}
+.recent>p{padding:16px}
+.recent .key{font-size:11px}
+.flash{animation:fl 1s ease-out}
+@keyframes fl{from{background:var(--accent-soft)}to{background:transparent}}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:9px 10px;background:var(--surface-2);border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:bottom}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+.tbl tr>*:first-child{padding-left:16px}
+.tbl tr>*:last-child{padding-right:16px}
+.tbl tbody tr:last-child td{border-bottom:0}
+.tbl tbody tr:hover td{background:var(--surface-2)}
+.tbl td.n,.tbl th.n{text-align:right;font-family:var(--font-m);font-variant-numeric:tabular-nums}
+.tbl tr.bn td,.tbl tr.bn:hover td{background:var(--bad-soft)}
+.tbl tfoot td{font-weight:600;background:var(--surface-2);border-top:1px solid var(--line);border-bottom:0}
+.tbl input[type="number"]{width:62px;height:30px;text-align:right;padding:0 8px}
+.up{color:var(--good)} .down{color:var(--bad)}
+#anWarn{padding:0 16px}
+
+/* ---------- figures ---------- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:14px 16px;display:grid;gap:6px;min-width:0;align-content:start}
+.kpi .big{font:600 28px/1.1 var(--font-m);font-variant-numeric:tabular-nums;letter-spacing:-.02em;overflow-wrap:anywhere}
+.kpi .big .small{font-size:13px;letter-spacing:0}
+.kpi .from{font-size:12.5px;color:var(--ink-2)}
+.kgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}
+.kmini{display:grid;gap:4px;min-width:0}
+.kmini span{font-size:12px;color:var(--ink-2)}
+.kmini strong{font:600 20px/1.2 var(--font-m);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.chart{overflow-x:auto}
+.chart svg{display:block;max-width:none}
+#simCanvas{display:block;width:100%;max-width:100%}
+
+/* ---------- method ---------- */
+.doc{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:1050px){.doc{grid-template-columns:minmax(0,1fr)}}
+.prose{display:grid;gap:12px;max-width:76ch}
+.prose h3{font-size:15px;margin-top:8px}
+.prose ol,.prose ul{margin:0;padding-left:1.3em;display:grid;gap:6px}
+.formulas{display:grid;gap:8px}
+.formula{display:grid;gap:3px;background:var(--surface-2);border:1px solid var(--line-2);border-radius:8px;padding:10px 12px;overflow-x:auto}
+.formula span{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.formula code{font:500 13.5px var(--font-m);white-space:nowrap;color:var(--ink)}
+@media (prefers-reduced-motion: reduce){.flash,.pill.live .dot{animation:none}html{scroll-behavior:auto}}
+</style>
+
+<div class="app">
+<aside class="side">
+  <div class="side-in">
+    <div class="brand">
+      <span class="brand-mark"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="11" r="6.6" stroke="currentColor" stroke-width="2"/><path d="M10 11V7.4M8 2.5h4M10 2.5v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <div><strong>OptiTime</strong><span>Vision</span></div>
+    </div>
+    <div class="side-extra study">
+      <label class="side-label" for="studyName">Estudio</label>
+      <input type="text" id="studyName" maxlength="60" aria-label="Nombre del estudio">
+      <p class="side-meta">Proceso piloto en condiciones controladas · 3 estaciones</p>
+    </div>
+    <div>
+      <p class="side-label nav-h side-extra">Estudio de tiempos</p>
+      <nav class="tabs" role="tablist" aria-label="Secciones">
+        <button role="tab" data-tab="captura"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="1.8" y="5.5" width="11.5" height="9.5" rx="1.8"/><path d="M13.3 9l4.9-2.6v7.7l-4.9-2.6"/></svg>Captura</button>
+        <button role="tab" data-tab="registros"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M7.5 5h9.5M7.5 10h9.5M7.5 15h9.5"/><path d="M3.2 5h.1M3.2 10h.1M3.2 15h.1" stroke-width="2.4"/></svg>Registros<span class="nav-count" id="navCount"></span></button>
+        <button role="tab" data-tab="analisis"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="11" r="6.6"/><path d="M10 11l2.8-2.2M8 2.5h4"/></svg>Análisis</button>
+        <button role="tab" data-tab="comparacion"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M2.5 17.5h15M5 15V9M9 15V4.5M13 15v-5M17 15V7"/></svg>Comparación</button>
+        <button role="tab" data-tab="metodo"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 4.2c2.4-.9 4.6-.7 6.5.6v12c-1.9-1.3-4.1-1.5-6.5-.6zM16.5 4.2c-2.4-.9-4.6-.7-6.5.6v12c1.9-1.3 4.1-1.5 6.5-.6z"/></svg>Método y guía</button>
+      </nav>
+    </div>
+    <div class="side-extra side-foot">
+      <p class="priv"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="8.8" width="12" height="8.4" rx="1.6"/><path d="M6.8 8.8V6.4a3.2 3.2 0 0 1 6.4 0v2.4"/></svg><span>El video se procesa en este navegador y no se guarda ni se envía.</span></p>
+      <p>Grupo 1 · Procesos de Producción<br>Universidad del Pacífico · 2026-II</p>
+    </div>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="page-h">
+    <div>
+      <p class="crumb" id="crumb">Estudio de tiempos</p>
+      <h1 id="pageTitle">Captura</h1>
+      <p class="sub" id="pageSub"></p>
+    </div>
+    <div class="scen">
+      <span class="label">Escenario</span>
+      <div class="seg" id="scenSeg" role="group" aria-label="Escenario de medición">
+        <button type="button" data-scen="AS-IS">AS-IS</button>
+        <button type="button" data-scen="TO-BE">TO-BE</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="notice" id="exampleBanner" hidden>
+    <p><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="7.6"/><path d="M10 9.2v4.6M10 6.4v.1"/></svg><span><strong>Datos de ejemplo cargados.</strong> Sirven para conocer la herramienta y no son mediciones. Bórralos antes de registrar el estudio real.</span></p>
+    <button class="btn sm" type="button" id="clearExamples">Borrar datos de ejemplo</button>
+  </div>
+
+  <!-- CAPTURA -->
+  <section class="tab" id="tab-captura">
+    <div class="grid2">
+      <div class="panel">
+        <div class="ph">
+          <h2>Captura de tiempos</h2>
+          <div class="ph-actions">
+            <div class="row" id="camStatus"></div>
+            <div class="seg" id="modeSeg" role="group" aria-label="Modo de captura">
+              <button type="button" data-mode="camara">Cámara</button>
+              <button type="button" data-mode="cronometro">Cronómetro</button>
+            </div>
+          </div>
+        </div>
+        <div class="pb">
+          <div id="camBox">
+            <div class="stage" id="stage">
+              <canvas id="stageCanvas" width="640" height="480" aria-label="Vista de cámara con zonas de trabajo"></canvas>
+              <div class="stage-msg" id="stageMsg">Activa la cámara y colócala sobre la mesa, de preferencia desde arriba. Cada rectángulo es una zona de trabajo.</div>
+            </div>
+            <div class="toolbar">
+              <button class="btn primary" type="button" id="camOn">Activar cámara</button>
+              <button class="btn" type="button" id="recBtn" disabled>Iniciar registro</button>
+              <select id="camSelect" aria-label="Cámara" hidden></select>
+              <label class="check"><input type="checkbox" id="mirror"> Imagen en espejo</label>
+            </div>
+            <details class="adv">
+              <summary>Ajustes de detección</summary>
+              <div class="fields">
+                <label class="f">Permanencia para confirmar (s)<input type="number" id="dwell" min="0.1" max="3" step="0.1"></label>
+                <label class="f">Ausencia para cerrar (s)<input type="number" id="gap" min="0.3" max="10" step="0.1"></label>
+                <label class="f">Duración mínima válida (s)<input type="number" id="minDur" min="0" max="10" step="0.1"></label>
+              </div>
+              <p class="small muted">La mano debe permanecer en una zona el tiempo de permanencia para que cuente como cambio de actividad; así un paso rápido por otra zona no corta la medición. Si no se ven manos durante el tiempo de ausencia, la actividad se cierra.</p>
+            </details>
+          </div>
+          <div id="swBox" hidden>
+            <p class="small muted" style="margin-bottom:12px">Toca la actividad que empieza; el tiempo de la anterior se cierra solo (método continuo). Teclado: <span class="mono">1</span>–<span class="mono">5</span> para cada actividad, <span class="mono">Espacio</span> para detener.</p>
+            <div class="pad" id="pad"></div>
+            <div class="toolbar">
+              <button class="btn" type="button" id="swStop">Detener actividad</button>
+              <button class="btn" type="button" id="swEnd">Terminar sesión</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="panel">
+          <div class="ph"><h2>Medición en curso</h2><span id="recPill"></span></div>
+          <div class="pb">
+            <div class="curact" id="curAct"><span class="muted">Sin actividad</span></div>
+            <div class="clock" id="clock">0,0<span class="unit">s</span></div>
+            <div class="cycle">
+              <span class="label">Ciclo</span>
+              <button class="btn sm" type="button" id="cycMinus" aria-label="Ciclo anterior">−</button>
+              <span class="num" id="cycNum">1</span>
+              <button class="btn sm" type="button" id="cycPlus" aria-label="Ciclo siguiente">+</button>
+              <span class="small muted" id="cycScen"></span>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="ph"><h2>Actividades y zonas</h2><span class="small muted" id="zoneHint"></span></div>
+          <div class="pb">
+            <div class="acts" id="acts"></div>
+            <div class="row" style="margin-top:12px">
+              <button class="btn sm" type="button" id="addAct">Agregar actividad</button>
+              <button class="btn sm" type="button" id="delAct">Quitar la última</button>
+              <button class="btn sm" type="button" id="resetZones">Repartir zonas</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="ph"><h2>Últimos registros</h2><span class="small muted" id="recentCount"></span></div>
+          <div class="recent" id="recent"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="ph"><h2>Entrada manual</h2><span class="small muted">Tiempos de cronómetro físico o de la revisión del video cuadro por cuadro</span></div>
+      <div class="pb">
+        <form id="manForm" class="fields" novalidate>
+          <label class="f">Actividad<select id="manAct"></select></label>
+          <label class="f">Ciclo<input type="number" id="manCyc" min="1" step="1" value="1"></label>
+          <label class="f">Tiempo (s)<input type="number" id="manSec" min="0" step="0.01" placeholder="0,00"></label>
+          <label class="f">Fuente<select id="manSrc"><option value="manual">Cronómetro físico</option><option value="video">Revisión de video</option></select></label>
+          <button class="btn primary" type="submit">Agregar registro</button>
+        </form>
+        <p class="err" id="manErr" hidden></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTROS -->
+  <section class="tab" id="tab-registros" hidden>
+    <div class="panel">
+      <div class="ph">
+        <h2>Registros de observación</h2>
+        <div class="ph-actions">
+          <select id="fScen" aria-label="Filtrar escenario"><option value="todos">Todos los escenarios</option><option>AS-IS</option><option>TO-BE</option></select>
+          <select id="fSrc" aria-label="Filtrar fuente"></select>
+        </div>
+      </div>
+      <div class="tw"><table class="tbl" id="recTable"></table></div>
+      <div class="pf">
+        <p class="small muted" id="recMsg"></p>
+        <div class="row">
+          <select id="csvFmt" aria-label="Formato CSV"><option value="std">CSV estándar ( , y . )</option><option value="es">Excel en español ( ; y , )</option></select>
+          <button class="btn" type="button" id="expCsv">Descargar CSV</button>
+          <button class="btn" type="button" id="copyCsv">Copiar CSV</button>
+          <label class="btn" for="impCsv">Importar CSV</label><input type="file" id="impCsv" accept=".csv,text/csv" hidden>
+          <button class="btn danger" type="button" id="delAll">Borrar todos</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANALISIS -->
+  <section class="tab" id="tab-analisis" hidden>
+    <div class="panel">
+      <div class="ph">
+        <h2>Tiempo estándar por actividad · <span id="anScenLbl"></span></h2>
+        <div class="seg" id="anSeg" role="group" aria-label="Escenario analizado"><button type="button" data-an="AS-IS">AS-IS</button><button type="button" data-an="TO-BE">TO-BE</button></div>
+      </div>
+      <div class="pb">
+        <div class="fields">
+          <label class="f">Fuente de datos<select id="srcFilter"></select></label>
+          <label class="f">Suplementos aplicados como<select id="conv"><option value="tn">% sobre el tiempo normal · TE = TN(1+s)</option><option value="jornada">% de la jornada · TE = TN/(1−s)</option></select></label>
+          <label class="f">Horas por turno<input type="number" id="horas" min="0.5" max="24" step="0.5"></label>
+          <label class="check"><input type="checkbox" id="excl"> Excluir atípicos (regla 1,5·RIC)</label>
+        </div>
+      </div>
+      <div id="anWarn"></div>
+      <div class="tw"><table class="tbl" id="anTable"></table></div>
+      <div class="pf">
+        <p class="small muted" style="flex:1 1 380px">El analista decide la valoración y los suplementos: escribe el valor y la tabla se recalcula. <span class="mono">n req.</span> es el número de observaciones necesario para 95 % de confianza y ±5 % de precisión.</p>
+        <div class="row"><span class="small muted" id="anMsg"></span><button class="btn" type="button" id="expAn">Descargar cálculos</button><button class="btn" type="button" id="copyAn">Copiar</button></div>
+      </div>
+    </div>
+    <div class="grid-even" id="anSys"></div>
+  </section>
+
+  <!-- COMPARACION -->
+  <section class="tab" id="tab-comparacion" hidden>
+    <div class="kpis" id="cmpKpis"></div>
+    <div class="panel">
+      <div class="ph"><h2>Tiempo estándar por actividad</h2><span class="small muted">segundos por unidad · menor es mejor</span></div>
+      <div class="pb"><div class="chart" id="cmpChart"></div></div>
+      <div class="tw" style="border-top:1px solid var(--line-2)"><table class="tbl" id="cmpTable"></table></div>
+    </div>
+    <div class="panel">
+      <div class="ph">
+        <h2>Simulación de la línea</h2>
+        <div class="ph-actions">
+          <label class="check small"><input type="checkbox" id="simVar" checked> Variabilidad observada</label>
+          <select id="simSpeed" aria-label="Velocidad"><option value="10">×10</option><option value="30" selected>×30</option><option value="60">×60</option><option value="120">×120</option></select>
+          <button class="btn sm" type="button" id="simReset">Reiniciar</button>
+          <button class="btn primary sm" type="button" id="simPlay">Pausar</button>
+        </div>
+      </div>
+      <div class="pb">
+        <p class="small muted" style="margin-bottom:14px;max-width:96ch">Un operario por estación y materia prima sin límite. Cada estación tarda su tiempo estándar y los pedidos se acumulan antes del cuello de botella (borde rojo). La simulación ilustra el cálculo de capacidad; no es una medición.</p>
+        <canvas id="simCanvas" height="250" aria-label="Simulación animada de la línea AS-IS y TO-BE"></canvas>
+      </div>
+    </div>
+    <div class="grid-even">
+      <div class="panel">
+        <div class="ph"><h2>Precisión del cronometraje</h2><select id="refSrc" aria-label="Fuente de referencia"></select></div>
+        <div class="pb" id="precBox"></div>
+      </div>
+      <div class="panel">
+        <div class="ph"><h2>Punto de equilibrio</h2><span class="small muted">Estudio manual frente a OptiTime</span></div>
+        <div class="pb">
+          <div class="fields">
+            <label class="f">Horas-analista por estudio manual<input type="number" id="beHm" min="0" step="0.1"></label>
+            <label class="f">Horas-analista con OptiTime<input type="number" id="beHt" min="0" step="0.1"></label>
+            <label class="f">Costo hora-analista (S/)<input type="number" id="beC" min="0" step="1"></label>
+            <label class="f">Costo fijo de implementación (S/)<input type="number" id="beCf" min="0" step="10"></label>
+            <label class="f">Costo variable por estudio (S/)<input type="number" id="beCv" min="0" step="1"></label>
+          </div>
+        </div>
+        <div class="pf"><div id="beOut"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METODO -->
+  <section class="tab" id="tab-metodo" hidden>
+    <div class="doc">
+      <div class="panel">
+        <div class="ph"><h2>Cómo calcula OptiTime</h2></div>
+        <div class="pb prose">
+          <p>La herramienta automatiza el método de medición del trabajo del curso: cronometraje, tiempo normal, tiempo estándar y evaluación de la capacidad. El analista sigue decidiendo la valoración del ritmo, los suplementos y qué datos son válidos.</p>
+          <div class="formulas">
+            <div class="formula"><span>Medición del trabajo</span><code>TO = Σ tᵢ / n · TN = TO × V · TE = TN × (1 + s) ó TE = TN / (1 − s)</code></div>
+            <div class="formula"><span>Capacidad</span><code>Cᵢ = 3600 / TEᵢ (u/h) · C línea = mín Cᵢ · C un operario = 3600 / Σ TEᵢ</code></div>
+            <div class="formula"><span>Productividad y balance</span><code>P = unidades / horas-hombre · Eficiencia = Σ TEᵢ / (k × TE máx)</code></div>
+            <div class="formula"><span>Tamaño de muestra (95 %, ±5 %)</span><code>n = ( 40 × √(n Σt² − (Σt)²) / Σt )²</code></div>
+          </div>
+          <p>V es el factor de valoración (100 % = ritmo normal) y s el porcentaje de suplementos. Usen la convención de suplementos que enseñó el curso y no la cambien entre escenarios.</p>
+          <h3>Cómo detecta las actividades</h3>
+          <p>Un modelo de detección de manos (MediaPipe Hand Landmarker) ubica 21 puntos de cada mano en cada cuadro. OptiTime toma el centro de la palma y revisa en qué zona está. Cuando la mano permanece en una zona nueva durante el tiempo de permanencia, la actividad anterior se cierra y empieza la nueva (cronometraje continuo: el traslado entre zonas se asigna a la actividad que termina). Las actividades más cortas que la duración mínima se descartan como ruido. Cuando la mano vuelve a la primera actividad, empieza un ciclo nuevo.</p>
+          <h3>Protocolo de medición</h3>
+          <ol>
+            <li>Fija la cámara sobre la mesa (cenital o en diagonal), con buena luz y un fondo que contraste con las manos.</li>
+            <li>Activa la cámara y dibuja una zona por actividad con el botón «Dibujar zona». Las zonas no deben tocarse.</li>
+            <li>Elige el escenario AS-IS y haz un ciclo de prueba para comprobar que cada actividad se detecta.</li>
+            <li>Graba la sesión con el celular mientras mides. Esa grabación, revisada cuadro por cuadro, será la referencia de precisión.</li>
+            <li>Registra al menos 10 ciclos con la cámara y, en paralelo, cronometra los mismos ciclos a mano. Transcríbelos en «Entrada manual».</li>
+            <li>Aplica la mejora del método (por ejemplo, reordenar la mesa), cambia a TO-BE y repite.</li>
+            <li>Revisa en Análisis que n alcance el número requerido, decide valoración y suplementos, y exporta los CSV para el Excel de verificación.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="col">
+        <div class="panel">
+          <div class="ph"><h2>Privacidad y uso responsable</h2></div>
+          <div class="pb prose">
+            <ul>
+              <li>El video se procesa dentro del navegador. No se envía a ningún servidor ni se guarda; solo se guardan tiempos, actividades y ciclos.</li>
+              <li>Los registros viven en este navegador. Exporta el CSV al terminar cada sesión, sobre todo en computadoras compartidas, y luego bórralos.</li>
+              <li>La detección puede fallar con poca luz, manos cruzadas o guantes. Por eso el analista revisa los atípicos y existe el modo cronómetro como respaldo.</li>
+              <li>Un tiempo estándar menor no debe lograrse a costa de la calidad o la seguridad del operario.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="ph"><h2>Requisitos</h2></div>
+          <div class="pb prose">
+            <ul>
+              <li>Chrome o Edge actualizados y una cámara web. No necesita instalar nada ni permisos de administrador.</li>
+              <li>Internet la primera vez que se activa la cámara, para descargar el modelo de manos (unos 8 MB).</li>
+              <li>Una laptop común basta: el modelo corre a 15–30 cuadros por segundo con gráficos integrados.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
+
+<script>
+(function(){
+'use strict';
+const BUNDLE='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
+const WASM='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm';
+const MODEL='https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task';
+const SRC_LABEL={camara:'Cámara',cronometro:'Cronómetro web',manual:'Cronómetro físico',video:'Revisión de video',ejemplo:'Ejemplo'};
+const SCENS=['AS-IS','TO-BE'];
+const MAXA=5;
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ok=x=>x!=null&&isFinite(x);
+const fmt=(x,d=2)=>ok(x)?x.toLocaleString('es-PE',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const store={get(k,d){try{const v=localStorage.getItem('optitime_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('optitime_'+k,JSON.stringify(v))}catch(e){}}};
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(r){let u=0,v=0;while(u===0)u=r();v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+
+/* ---------- config & data ---------- */
+function stripZones(k){const z=[],m=0.03,w=(1-m*(k+1))/k;for(let i=0;i<k;i++)z.push({x:m+i*(w+m),y:0.12,w:w,h:0.76});return z}
+function defaultCfg(){return{acts:['Doblar hoja','Ensobrar y cerrar','Etiquetar y apilar'],zones:stripZones(3),valor:[100,100,100],supl:[15,15,15],conv:'tn',horas:8,dwell:0.6,gap:1.5,minDur:0.8,mirror:false,srcFilter:'todas',excl:false,refSrc:'',be:{hm:2,ht:0.5,c:25,cf:300,cv:0}}}
+let cfg=Object.assign(defaultCfg(),store.get('cfg',{}));
+cfg.be=Object.assign(defaultCfg().be,cfg.be||{});
+function fixArrays(){const k=cfg.acts.length;['valor','supl'].forEach(key=>{const d=key==='valor'?100:15;cfg[key]=cfg[key].slice(0,k);while(cfg[key].length<k)cfg[key].push(d)});if(!Array.isArray(cfg.zones)||cfg.zones.length!==k)cfg.zones=stripZones(k)}
+fixArrays();
+const saveCfg=()=>store.set('cfg',cfg);
+
+function exampleRecords(){
+  const r=mulberry32(20261109),out=[];
+  const spec={'AS-IS':{m:[6.2,9.8,5.1],s:[0.55,1.05,0.45]},'TO-BE':{m:[6.0,7.3,5.0],s:[0.5,0.7,0.45]}};
+  const names=['Doblar hoja','Ensobrar y cerrar','Etiquetar y apilar'];
+  let t=Date.UTC(2026,10,9,14,0,0);
+  for(const sc of SCENS){for(let c=1;c<=10;c++){for(let a=0;a<3;a++){let x=spec[sc].m[a]+spec[sc].s[a]*gauss(r);if(sc==='AS-IS'&&a===1&&c===7)x+=4.2;x=Math.max(1,x);t+=x*1000;out.push({id:'ej'+sc+c+a,ts:new Date(t).toISOString(),scenario:sc,activity:a,activityName:names[a],cycle:c,seconds:Math.round(x*100)/100,source:'ejemplo'})}}}
+  return out;
+}
+let records=store.get('records',null);
+if(!Array.isArray(records)){records=exampleRecords();store.set('records',records)}
+const saveRecords=()=>store.set('records',records);
+let scenario=store.get('scenario','AS-IS'); if(!SCENS.includes(scenario))scenario='AS-IS';
+let anScen=scenario;
+
+/* ---------- stats ---------- */
+function stats(xs){
+  const n=xs.length;if(!n)return{n:0};
+  let sum=0,sq=0,min=Infinity,max=-Infinity;for(const x of xs){sum+=x;sq+=x*x;if(x<min)min=x;if(x>max)max=x}
+  const mean=sum/n;const sd=n>1?Math.sqrt(Math.max(0,(sq-n*mean*mean)/(n-1))):null;
+  const nreq=n>1&&sum>0?Math.pow(40*Math.sqrt(Math.max(0,n*sq-sum*sum))/sum,2):null;
+  return{n,sum,mean,sd,cv:sd!=null&&mean>0?sd/mean:null,min,max,nreq};
+}
+function quart(xs){const s=[...xs].sort((a,b)=>a-b);const q=p=>{const i=(s.length-1)*p,lo=Math.floor(i),hi=Math.ceil(i);return s[lo]+(s[hi]-s[lo])*(i-lo)};return[q(.25),q(.75)]}
+function iqrBounds(xs){if(xs.length<5)return null;const[q1,q3]=quart(xs),d=1.5*(q3-q1);return[q1-d,q3+d]}
+function computeScenario(sc){
+  const k=cfg.acts.length,src=cfg.srcFilter;
+  const all=records.filter(r=>r.scenario===sc&&r.activity<k);
+  const rows=all.filter(r=>src==='todas'||r.source===src);
+  const sources=[...new Set(all.map(r=>r.source))];
+  const per=[];
+  for(let i=0;i<k;i++){
+    let xs=rows.filter(r=>r.activity===i).map(r=>r.seconds);
+    const b=iqrBounds(xs);const out=b?xs.filter(x=>x<b[0]||x>b[1]).length:0;
+    if(cfg.excl&&b)xs=xs.filter(x=>x>=b[0]&&x<=b[1]);
+    const st=stats(xs);const v=(+cfg.valor[i]||0)/100,s=(+cfg.supl[i]||0)/100;
+    const TN=st.n?st.mean*v:null;
+    let TE=null;if(TN!=null){TE=cfg.conv==='jornada'?(s<1?TN/(1-s):null):TN*(1+s)}
+    const cap=TE>0?3600/TE:null;
+    per.push(Object.assign(st,{outliers:out,excluded:cfg.excl?out:0,TN,TE,cap,capTurno:cap!=null?cap*cfg.horas:null}));
+  }
+  const complete=k>0&&per.every(p=>p.TE>0);
+  let sys=null;
+  if(complete){const sumTE=per.reduce((a,p)=>a+p.TE,0);let bn=0;per.forEach((p,i)=>{if(p.TE>per[bn].TE)bn=i});const maxTE=per[bn].TE;
+    sys={sumTE,cap1:3600/sumTE,prod1:3600/sumTE,bn,maxTE,capLine:3600/maxTE,prodLine:3600/maxTE/k,balance:sumTE/(k*maxTE),k}}
+  return{sc,per,sys,complete,sources,nRows:rows.length};
+}
+function pct(a,b){return ok(a)&&ok(b)&&a!==0?(b-a)/a*100:null}
+
+/* ---------- tabs & scenario ---------- */
+let curTab='captura';
+const PAGES={captura:['Captura','Cronometra cada actividad con la cámara o con el cronómetro web.'],registros:['Registros','Observaciones guardadas en este navegador. Exporta el CSV al terminar cada sesión.'],analisis:['Análisis','Tiempo observado, normal y estándar; capacidad y cuello de botella.'],comparacion:['Comparación','Resultados AS-IS frente a TO-BE, simulación de la línea y retorno.'],metodo:['Método y guía','Fórmulas, protocolo de medición y uso responsable.']};
+function showTab(t){curTab=t;$('#pageTitle').textContent=PAGES[t][0];$('#pageSub').textContent=PAGES[t][1];$$('.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===t)));$$('section.tab').forEach(s=>s.hidden=s.id!=='tab-'+t);renderTab();if(t==='comparacion')simEnsure();else simPause(true)}
+$$('.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+function renderTab(){if(curTab==='captura')renderCapture();else if(curTab==='registros')renderRecords();else if(curTab==='analisis')renderAnalysis();else if(curTab==='comparacion')renderCompare()}
+function setScenario(s){if(cap.recording)stopRecording();scenario=s;store.set('scenario',s);$$('#scenSeg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.scen===s)));cap.cycle=nextCycle(s,cap.mode==='camara'?'camara':'cronometro');cap.lastIdx=null;renderCapture();if(curTab!=='captura')renderTab()}
+$$('#scenSeg button').forEach(b=>b.addEventListener('click',()=>setScenario(b.dataset.scen)));
+function renderBanner(){$('#exampleBanner').hidden=!records.some(r=>r.source==='ejemplo')}
+$('#clearExamples').addEventListener('click',()=>{records=records.filter(r=>r.source!=='ejemplo');saveRecords();afterData()});
+function afterData(){renderBanner();simBuilt=false;renderTab();renderRecent()}
+
+/* ---------- capture state ---------- */
+const cap={mode:'camara',recording:false,cycle:1,lastIdx:null};
+function nextCycle(sc,src){let m=0;for(const r of records)if(r.scenario===sc&&r.source===src&&r.cycle>m)m=r.cycle;return m+1}
+function addObs(act,sec,source){
+  if(cap.lastIdx!=null&&act<=cap.lastIdx)cap.cycle++;
+  cap.lastIdx=act;
+  records.push({id:uid(),ts:new Date().toISOString(),scenario,activity:act,activityName:cfg.acts[act],cycle:cap.cycle,seconds:Math.round(sec*100)/100,source});
+  saveRecords();renderBanner();renderRecent(true);renderCycle();simBuilt=false;
+}
+function renderCycle(){$('#cycNum').textContent=cap.cycle;$('#cycScen').textContent=scenario+' · '+SRC_LABEL[cap.mode==='camara'?'camara':'cronometro']}
+$('#cycMinus').addEventListener('click',()=>{cap.cycle=Math.max(1,cap.cycle-1);cap.lastIdx=null;renderCycle()});
+$('#cycPlus').addEventListener('click',()=>{cap.cycle++;cap.lastIdx=null;renderCycle()});
+
+function setMode(m){if(cap.recording)stopRecording();cap.mode=m;$$('#modeSeg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===m)));$('#camBox').hidden=m!=='camara';$('#swBox').hidden=m!=='cronometro';cap.cycle=nextCycle(scenario,m==='camara'?'camara':'cronometro');cap.lastIdx=null;renderCapture()}
+$$('#modeSeg button').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+
+/* segmenter (camera) */
+const seg={cur:null,cand:null};
+function segClose(c,end){const d=end-c.start;if(d>=cfg.minDur)addObs(c.act,d,'camara');else note('Descartado: '+cfg.acts[c.act]+' duró '+fmt(d,1)+' s (menos que el mínimo).')}
+function segFeed(t,hit){
+  if(seg.cur&&hit.includes(seg.cur.act)){seg.cur.last=t;seg.cand=null}
+  else{
+    let z=null;if(hit.length){const nx=seg.cur?(seg.cur.act+1)%cfg.acts.length:0;z=hit.includes(nx)?nx:hit[0]}
+    if(z!=null){
+      if(!seg.cand||seg.cand.act!==z)seg.cand={act:z,since:t};
+      else if(t-seg.cand.since>=cfg.dwell){const s=seg.cand.since;if(seg.cur)segClose(seg.cur,s);seg.cur={act:z,start:s,last:t};seg.cand=null}
+    }else seg.cand=null;
+  }
+  if(seg.cur&&t-seg.cur.last>=cfg.gap){segClose(seg.cur,seg.cur.last);seg.cur=null}
+}
+/* stopwatch */
+const sw={cur:null};
+function swPress(i){const t=performance.now()/1000;if(!cap.recording)startRecording();if(sw.cur){if(sw.cur.act===i)return;swClose(t)}sw.cur={act:i,start:t};renderPad()}
+function swClose(t){const c=sw.cur;sw.cur=null;const d=t-c.start;if(d>=0.2)addObs(c.act,d,'cronometro');renderPad()}
+$('#swStop').addEventListener('click',()=>{if(sw.cur)swClose(performance.now()/1000)});
+$('#swEnd').addEventListener('click',()=>stopRecording());
+document.addEventListener('keydown',e=>{
+  if(curTab!=='captura'||cap.mode!=='cronometro')return;
+  const tg=e.target.tagName;if(tg==='INPUT'||tg==='SELECT'||tg==='TEXTAREA')return;
+  if(e.key===' '){e.preventDefault();if(sw.cur)swClose(performance.now()/1000)}
+  const n=parseInt(e.key,10);if(n>=1&&n<=cfg.acts.length){e.preventDefault();swPress(n-1)}
+});
+function startRecording(){cap.recording=true;cap.cycle=nextCycle(scenario,cap.mode==='camara'?'camara':'cronometro');cap.lastIdx=null;seg.cur=null;seg.cand=null;renderCapture()}
+function stopRecording(){const t=performance.now()/1000;if(seg.cur){segClose(seg.cur,seg.cur.last);seg.cur=null}seg.cand=null;if(sw.cur)swClose(t);cap.recording=false;renderCapture()}
+
+let noteTimer=null;
+function note(msg){const el=$('#stageMsg');el.textContent=msg;el.hidden=false;clearTimeout(noteTimer);noteTimer=setTimeout(()=>{if(cam.stream)el.hidden=true},3500)}
+
+/* ---------- camera ---------- */
+const cam={stream:null,video:document.createElement('video'),canvas:$('#stageCanvas'),landmarker:null,loading:false,hands:[],hit:[],lastDet:0,lastVT:-1,fps:0,fpsN:0,fpsT:0,edit:null,drag:null,err:''};
+cam.ctx=cam.canvas.getContext('2d');cam.video.muted=true;cam.video.playsInline=true;
+function camStatus(){
+  const el=$('#camStatus');const p=[];
+  if(cam.err)p.push('<span class="pill bad"><span class="dot"></span>'+esc(cam.err)+'</span>');
+  else if(cam.loading)p.push('<span class="pill warn"><span class="dot"></span>Cargando modelo de manos…</span>');
+  else if(cam.landmarker)p.push('<span class="pill ok"><span class="dot"></span>Modelo listo</span>');
+  if(cam.stream&&cam.landmarker)p.push('<span class="pill num">'+cam.fps+' fps</span>');
+  el.innerHTML=p.join('');
+}
+async function startCamera(deviceId){
+  cam.err='';
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){cam.err='Este navegador no permite usar la cámara aquí';camStatus();$('#stageMsg').textContent='Abre OptiTime desde su enlace publicado (https) o como archivo en Chrome o Edge. Mientras tanto puedes usar el modo Cronómetro.';return}
+  try{
+    if(cam.stream)cam.stream.getTracks().forEach(t=>t.stop());
+    cam.stream=await navigator.mediaDevices.getUserMedia({audio:false,video:deviceId?{deviceId:{exact:deviceId},width:{ideal:640},height:{ideal:480}}:{width:{ideal:640},height:{ideal:480}}});
+  }catch(e){
+    cam.stream=null;
+    cam.err=e&&e.name==='NotAllowedError'?'Permiso de cámara denegado':(e&&e.name==='NotFoundError'?'No se encontró cámara':'No se pudo abrir la cámara');
+    camStatus();
+    $('#stageMsg').textContent=e&&e.name==='NotAllowedError'?'El navegador o esta vista bloquearon la cámara. Permite el acceso desde el candado de la barra de direcciones; si estás en la vista previa de Claude, abre la versión publicada en GitHub Pages. El modo Cronómetro funciona igual.':'Revisa que la cámara esté conectada y que otra aplicación no la esté usando.';
+    $('#stageMsg').hidden=false;return;
+  }
+  cam.video.srcObject=cam.stream;try{await cam.video.play()}catch(e){}
+  $('#camOn').textContent='Cambiar cámara';$('#camOn').classList.remove('primary');
+  listCameras();
+  if(!cam.landmarker)loadModel();
+  $('#stageMsg').hidden=!!cam.landmarker;
+  renderCapture();
+}
+async function listCameras(){try{const ds=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='videoinput');const sel=$('#camSelect');if(ds.length<2){sel.hidden=true;return}const cur=cam.stream&&cam.stream.getVideoTracks()[0]?cam.stream.getVideoTracks()[0].getSettings().deviceId:'';sel.innerHTML=ds.map((d,i)=>'<option value="'+esc(d.deviceId)+'"'+(d.deviceId===cur?' selected':'')+'>'+esc(d.label||('Cámara '+(i+1)))+'</option>').join('');sel.hidden=false}catch(e){}}
+$('#camSelect').addEventListener('change',e=>startCamera(e.target.value));
+async function loadModel(){
+  if(cam.loading)return;cam.loading=true;camStatus();$('#stageMsg').textContent='Descargando el modelo de detección de manos (solo la primera vez)…';$('#stageMsg').hidden=false;
+  try{
+    const here=async u=>{if(!/^https?:$/.test(location.protocol))return false;try{const r=await fetch(u,{method:'HEAD',cache:'no-store'});return r.ok}catch(e){return false}};
+    const [lb,lw,lm]=await Promise.all([here('vision_bundle.mjs'),here('wasm/vision_wasm_internal.js'),here('hand_landmarker.task')]);
+    const vision=await import(lb?new URL('vision_bundle.mjs',location.href).href:BUNDLE);
+    const fs=await vision.FilesetResolver.forVisionTasks(lw?new URL('wasm',location.href).href:WASM);
+    const modelPath=lm?new URL('hand_landmarker.task',location.href).href:MODEL;
+    const opts=d=>({baseOptions:{modelAssetPath:modelPath,delegate:d},runningMode:'VIDEO',numHands:2,minHandDetectionConfidence:0.5,minHandPresenceConfidence:0.5,minTrackingConfidence:0.5});
+    try{cam.landmarker=await vision.HandLandmarker.createFromOptions(fs,opts('GPU'))}catch(e){cam.landmarker=await vision.HandLandmarker.createFromOptions(fs,opts('CPU'))}
+    $('#stageMsg').textContent='Modelo listo. Revisa que cada zona se ilumine al poner la mano encima y pulsa «Iniciar registro».';
+    setTimeout(()=>{if(cam.landmarker)$('#stageMsg').hidden=true},4000);
+  }catch(e){cam.err='No se pudo cargar el modelo';$('#stageMsg').textContent='No se pudo descargar el modelo de manos. Revisa la conexión a internet o usa el modo Cronómetro.';$('#stageMsg').hidden=false}
+  cam.loading=false;camStatus();renderCapture();
+}
+$('#camOn').addEventListener('click',()=>startCamera($('#camSelect').hidden?undefined:$('#camSelect').value));
+$('#recBtn').addEventListener('click',()=>{if(cap.recording)stopRecording();else startRecording()});
+$('#mirror').addEventListener('change',e=>{cfg.mirror=e.target.checked;saveCfg()});
+
+function handInfo(lm){
+  const pts=lm.map(p=>({x:cfg.mirror?1-p.x:p.x,y:p.y}));
+  const ids=[0,5,9,13,17];let cx=0,cy=0;ids.forEach(i=>{cx+=pts[i].x;cy+=pts[i].y});cx/=5;cy/=5;
+  let zone=null,best=Infinity;cfg.zones.forEach((z,i)=>{if(cx>=z.x&&cx<=z.x+z.w&&cy>=z.y&&cy<=z.y+z.h){const a=z.w*z.h;if(a<best){best=a;zone=i}}});
+  return{pts,cx,cy,zone};
+}
+const colorCache={};
+function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#888'}
+function refreshColors(){['--stage','--stage-ink','--bad','--ink','--ink-2','--line','--surface','--surface-2','--accent','--good','--a1','--a2','--a3','--a4','--a5'].forEach(n=>colorCache[n]=tok(n))}
+refreshColors();
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{refreshColors();renderCapture();if(curTab==='comparacion')renderCompare()})}catch(e){}
+new MutationObserver(()=>{refreshColors();if(curTab==='comparacion')renderCompare()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+const C=n=>colorCache[n]||'#888';
+const actColor=i=>C('--a'+(i%5+1));
+function rgba(hex,a){const h=hex.replace('#','');if(h.length<6)return hex;const n=parseInt(h.slice(0,6),16);return'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')'}
+
+function drawStage(){
+  const c=cam.canvas,ctx=cam.ctx;
+  const live=cam.stream&&cam.video.readyState>=2&&cam.video.videoWidth;
+  const W=live?cam.video.videoWidth:640,H=live?cam.video.videoHeight:480;
+  if(c.width!==W||c.height!==H){c.width=W;c.height=H}
+  const u=W/640;
+  ctx.fillStyle=C('--stage');ctx.fillRect(0,0,W,H);
+  if(live){ctx.save();if(cfg.mirror){ctx.translate(W,0);ctx.scale(-1,1)}ctx.drawImage(cam.video,0,0,W,H);ctx.restore()}
+  else{ctx.strokeStyle=rgba(C('--stage-ink'),.08);ctx.lineWidth=1;for(let x=0;x<W;x+=40*u){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let y=0;y<H;y+=40*u){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}}
+  const activeAct=cap.mode==='camara'&&seg.cur?seg.cur.act:null;
+  cfg.zones.forEach((z,i)=>{
+    const col=actColor(i),x=z.x*W,y=z.y*H,w=z.w*W,h=z.h*H;
+    const lit=cam.hit.includes(i);
+    ctx.fillStyle=rgba(col,activeAct===i?.3:lit?.2:.1);ctx.fillRect(x,y,w,h);
+    ctx.strokeStyle=col;ctx.lineWidth=(activeAct===i?5:2.5)*u;ctx.setLineDash(cam.edit===i?[8*u,6*u]:[]);ctx.strokeRect(x,y,w,h);ctx.setLineDash([]);
+    const lbl=(i+1)+' · '+cfg.acts[i];ctx.font='600 '+Math.round(14*u)+'px "IBM Plex Sans",system-ui,sans-serif';
+    const tw=Math.min(ctx.measureText(lbl).width+16*u,w);ctx.fillStyle=col;ctx.fillRect(x,y,tw,24*u);ctx.fillStyle='#fff';ctx.save();ctx.beginPath();ctx.rect(x,y,tw,24*u);ctx.clip();ctx.fillText(lbl,x+8*u,y+17*u);ctx.restore();
+  });
+  if(cam.drag){const d=cam.drag,x=Math.min(d.x0,d.x1)*W,y=Math.min(d.y0,d.y1)*H;ctx.strokeStyle='#fff';ctx.lineWidth=2*u;ctx.setLineDash([6*u,4*u]);ctx.strokeRect(x,y,Math.abs(d.x1-d.x0)*W,Math.abs(d.y1-d.y0)*H);ctx.setLineDash([])}
+  for(const hd of cam.hands){
+    ctx.fillStyle='rgba(255,255,255,.85)';for(const p of hd.pts){ctx.beginPath();ctx.arc(p.x*W,p.y*H,2.6*u,0,7);ctx.fill()}
+    ctx.beginPath();ctx.arc(hd.cx*W,hd.cy*H,9*u,0,7);ctx.fillStyle=hd.zone!=null?actColor(hd.zone):'#fff';ctx.fill();ctx.lineWidth=3*u;ctx.strokeStyle='#fff';ctx.stroke();
+  }
+  if(cap.recording&&cap.mode==='camara'){ctx.fillStyle=C('--bad');ctx.beginPath();ctx.arc(W-22*u,22*u,8*u,0,7);ctx.fill();ctx.fillStyle='#fff';ctx.font='600 '+Math.round(13*u)+'px "IBM Plex Sans",system-ui,sans-serif';ctx.textAlign='right';ctx.fillText('REC',W-36*u,27*u);ctx.textAlign='left'}
+}
+/* zone drawing */
+function canvasPt(e){const r=cam.canvas.getBoundingClientRect();return{x:Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),y:Math.min(1,Math.max(0,(e.clientY-r.top)/r.height))}}
+cam.canvas.addEventListener('pointerdown',e=>{if(cam.edit==null)return;const p=canvasPt(e);cam.drag={x0:p.x,y0:p.y,x1:p.x,y1:p.y};cam.canvas.setPointerCapture(e.pointerId)});
+cam.canvas.addEventListener('pointermove',e=>{if(!cam.drag)return;const p=canvasPt(e);cam.drag.x1=p.x;cam.drag.y1=p.y});
+cam.canvas.addEventListener('pointerup',()=>{if(!cam.drag)return;const d=cam.drag;cam.drag=null;const w=Math.abs(d.x1-d.x0),h=Math.abs(d.y1-d.y0);if(w>0.03&&h>0.03){cfg.zones[cam.edit]={x:Math.min(d.x0,d.x1),y:Math.min(d.y0,d.y1),w,h};saveCfg()}cam.edit=null;$('#stage').classList.remove('editing');renderActs()});
+
+/* main loop */
+function loop(){
+  const now=performance.now();
+  if(cam.landmarker&&cam.stream&&cam.video.readyState>=2&&now-cam.lastDet>=60&&cam.video.currentTime!==cam.lastVT){
+    cam.lastVT=cam.video.currentTime;cam.lastDet=now;
+    try{const res=cam.landmarker.detectForVideo(cam.video,now);cam.hands=(res.landmarks||[]).map(handInfo)}catch(e){cam.hands=[]}
+    cam.hit=[...new Set(cam.hands.map(h=>h.zone).filter(z=>z!=null))];
+    cam.fpsN++;if(now-cam.fpsT>1000){cam.fps=cam.fpsN;cam.fpsN=0;cam.fpsT=now;camStatus()}
+    if(cap.recording&&cap.mode==='camara')segFeed(now/1000,cam.hit);
+  }
+  if(curTab==='captura'){if(cap.mode==='camara')drawStage();updateClock(now/1000)}
+  requestAnimationFrame(loop);
+}
+
+/* ---------- capture rendering ---------- */
+function updateClock(t){
+  const cur=cap.mode==='camara'?seg.cur:sw.cur;
+  const el=$('#curAct');const key=cur?('a'+cur.act):'none';
+  if(el.dataset.k!==key){el.dataset.k=key;el.innerHTML=cur?'<span class="sw" style="background:var(--a'+(cur.act%5+1)+')"></span>'+esc(cfg.acts[cur.act]):'<span class="muted">'+(cap.recording?(cap.mode==='camara'?'Esperando una mano en una zona':'Toca una actividad'):'Sin actividad')+'</span>'}
+  const s=cur?Math.max(0,t-cur.start):0;
+  $('#clock').firstChild.nodeValue=fmt(s,1);
+}
+function renderCapture(){
+  $$('#modeSeg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===cap.mode)));
+  const rb=$('#recBtn');rb.disabled=!cam.landmarker||!cam.stream;rb.textContent=cap.recording&&cap.mode==='camara'?'Pausar registro':'Iniciar registro';rb.classList.toggle('rec',cap.recording&&cap.mode==='camara');rb.classList.toggle('primary',!cap.recording&&!!cam.landmarker);
+  $('#recPill').innerHTML=cap.recording?'<span class="pill live"><span class="dot"></span>Registrando · '+esc(scenario)+'</span>':'<span class="pill">'+esc(scenario)+'</span>';
+  $('#mirror').checked=!!cfg.mirror;
+  $('#curAct').dataset.k='';
+  renderCycle();renderActs();renderPad();renderRecent();camStatus();
+  ['dwell','gap','minDur'].forEach(k=>{const el=$('#'+k);if(document.activeElement!==el)el.value=cfg[k]});
+  if(cap.mode==='camara')drawStage();
+}
+function renderActs(){
+  const k=cfg.acts.length;
+  $('#acts').innerHTML=cfg.acts.map((a,i)=>'<div class="act"><span class="key" style="background:var(--a'+(i%5+1)+')">'+(i+1)+'</span><input type="text" data-act="'+i+'" value="'+esc(a)+'" aria-label="Nombre de la actividad '+(i+1)+'" maxlength="40"><button class="btn sm" type="button" data-zone="'+i+'"'+(cap.mode!=='camara'?' disabled':'')+'>'+(cam.edit===i?'Arrastra en la imagen':'Dibujar zona')+'</button></div>').join('');
+  $('#zoneHint').textContent=cam.edit!=null?'Arrastra un rectángulo sobre la imagen':'';
+  $('#addAct').disabled=k>=MAXA||cap.recording;$('#delAct').disabled=k<=2||cap.recording;
+  const opts=cfg.acts.map((a,i)=>'<option value="'+i+'">'+(i+1)+'. '+esc(a)+'</option>').join('');
+  const ms=$('#manAct'),v=ms.value;ms.innerHTML=opts;if(v&&+v<k)ms.value=v;
+}
+$('#acts').addEventListener('change',e=>{const i=e.target.dataset.act;if(i==null)return;const v=e.target.value.trim();cfg.acts[+i]=v||('Actividad '+(+i+1));saveCfg();renderActs();renderPad()});
+$('#acts').addEventListener('click',e=>{const b=e.target.closest('[data-zone]');if(!b)return;const i=+b.dataset.zone;cam.edit=cam.edit===i?null:i;$('#stage').classList.toggle('editing',cam.edit!=null);renderActs()});
+$('#addAct').addEventListener('click',()=>{if(cfg.acts.length>=MAXA)return;cfg.acts.push('Actividad '+(cfg.acts.length+1));cfg.zones=stripZones(cfg.acts.length);fixArrays();saveCfg();afterData();renderCapture()});
+$('#delAct').addEventListener('click',()=>{if(cfg.acts.length<=2)return;cfg.acts.pop();cfg.zones=cfg.zones.slice(0,cfg.acts.length);fixArrays();saveCfg();afterData();renderCapture()});
+$('#resetZones').addEventListener('click',()=>{cfg.zones=stripZones(cfg.acts.length);saveCfg();renderCapture()});
+['dwell','gap','minDur'].forEach(k=>$('#'+k).addEventListener('change',e=>{const v=parseFloat(e.target.value);if(ok(v)&&v>=0){cfg[k]=v;saveCfg()}else e.target.value=cfg[k]}));
+
+function renderPad(){
+  $('#pad').innerHTML=cfg.acts.map((a,i)=>'<button type="button" class="padbtn" data-sw="'+i+'" aria-pressed="'+(sw.cur&&sw.cur.act===i)+'" style="color:var(--a'+(i%5+1)+')"><span class="key" style="background:var(--a'+(i%5+1)+')">'+(i+1)+'</span><span style="color:var(--ink)">'+esc(a)+'</span></button>').join('');
+}
+$('#pad').addEventListener('click',e=>{const b=e.target.closest('[data-sw]');if(b)swPress(+b.dataset.sw)});
+
+function renderRecent(flash){
+  const last=records.slice(-8).reverse();
+  $('#recentCount').textContent=records.length+' en total';$('#navCount').textContent=records.length||'';
+  $('#recent').innerHTML=last.length?last.map((r,j)=>'<div'+(flash&&j===0?' class="flash"':'')+'><span class="key" style="background:var(--a'+(r.activity%5+1)+');width:22px;height:22px">'+(r.activity+1)+'</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis">'+esc(r.activityName||cfg.acts[r.activity]||'—')+' <span class="muted small">· C'+r.cycle+' · '+esc(r.scenario)+'</span></span><span class="small muted">'+esc(SRC_LABEL[r.source]||r.source)+'</span><span class="num">'+fmt(r.seconds,2)+' s</span></div>').join(''):'<p class="small muted">Aún no hay registros.</p>';
+}
+
+/* manual entry */
+$('#manForm').addEventListener('submit',e=>{
+  e.preventDefault();const err=$('#manErr');
+  const a=+$('#manAct').value,c=parseInt($('#manCyc').value,10),s=parseFloat(String($('#manSec').value).replace(',','.'));
+  if(!(c>=1)){err.textContent='El ciclo debe ser un número entero desde 1.';err.hidden=false;return}
+  if(!(s>0&&s<3600)){err.textContent='El tiempo debe ser mayor que 0 y menor que 3600 s.';err.hidden=false;return}
+  err.hidden=true;
+  records.push({id:uid(),ts:new Date().toISOString(),scenario,activity:a,activityName:cfg.acts[a],cycle:c,seconds:Math.round(s*100)/100,source:$('#manSrc').value});
+  saveRecords();renderBanner();renderRecent(true);simBuilt=false;
+  $('#manSec').value='';
+  if(a<cfg.acts.length-1)$('#manAct').value=a+1;else{$('#manAct').value=0;$('#manCyc').value=c+1}
+  $('#manSec').focus();
+});
+
+/* ---------- records ---------- */
+function srcOptions(withAll){const present=[...new Set(records.map(r=>r.source))];const all=['camara','cronometro','manual','video','ejemplo'].filter(s=>present.includes(s));return(withAll?'<option value="todas">Todas las fuentes</option>':'')+all.map(s=>'<option value="'+s+'">'+SRC_LABEL[s]+'</option>').join('')}
+let delArm=false;
+function renderRecords(){
+  const fs=$('#fSrc'),v=fs.value||'todas';fs.innerHTML=srcOptions(true);fs.value=[...fs.options].some(o=>o.value===v)?v:'todas';
+  const sc=$('#fScen').value,src=fs.value;
+  const rows=records.map((r,i)=>[r,i]).filter(([r])=>(sc==='todos'||r.scenario===sc)&&(src==='todas'||r.source===src)).reverse();
+  $('#recTable').innerHTML=rows.length?'<thead><tr><th>Fecha y hora</th><th>Escenario</th><th>Actividad</th><th class="n">Ciclo</th><th class="n">Tiempo (s)</th><th>Fuente</th><th></th></tr></thead><tbody>'+rows.map(([r])=>'<tr><td class="small">'+esc(new Date(r.ts).toLocaleString('es-PE',{dateStyle:'short',timeStyle:'medium'}))+'</td><td>'+esc(r.scenario)+'</td><td><span class="row" style="gap:6px;flex-wrap:nowrap"><span class="sw" style="background:var(--a'+(r.activity%5+1)+')"></span>'+esc(r.activityName||cfg.acts[r.activity]||'—')+'</span></td><td class="n">'+r.cycle+'</td><td class="n">'+fmt(r.seconds,2)+'</td><td class="small">'+esc(SRC_LABEL[r.source]||r.source)+'</td><td><button class="btn sm" type="button" data-del="'+esc(r.id)+'" aria-label="Eliminar registro">Eliminar</button></td></tr>').join('')+'</tbody>':'<tbody><tr><td><div class="empty">No hay registros con estos filtros. Mide en la pestaña Captura o importa un CSV.</div></td></tr></tbody>';
+  $('#recMsg').textContent=rows.length+' registros mostrados de '+records.length+'.';
+  $('#delAll').textContent=delArm?'Confirmar: borrar los '+records.length+' registros':'Borrar todos';
+}
+$('#fScen').addEventListener('change',renderRecords);$('#fSrc').addEventListener('change',renderRecords);
+$('#recTable').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(!b)return;records=records.filter(r=>r.id!==b.dataset.del);saveRecords();afterData()});
+$('#delAll').addEventListener('click',()=>{if(!delArm){delArm=true;renderRecords();setTimeout(()=>{delArm=false;if(curTab==='registros')renderRecords()},5000);return}delArm=false;records=[];saveRecords();afterData()});
+
+function csvJoin(rows){const es=$('#csvFmt').value==='es',sep=es?';':',';return rows.map(r=>r.map(v=>{let s=typeof v==='number'?(es?String(v).replace('.',','):String(v)):String(v==null?'':v);if(/[",;\n]/.test(s))s='"'+s.replace(/"/g,'""')+'"';return s}).join(sep)).join('\r\n')}
+function recordsCsv(){return csvJoin([['id','fecha_hora','escenario','actividad_n','actividad','ciclo','tiempo_s','fuente']].concat(records.map(r=>[r.id,r.ts,r.scenario,r.activity+1,r.activityName||cfg.acts[r.activity]||'',r.cycle,r.seconds,r.source])))}
+async function download(name,text,msgEl){try{if(window.claude&&window.claude.use){const dl=await window.claude.use('downloads');if(dl){await dl.save({filename:name,data:new Blob(['\ufeff'+text],{type:'text/csv;charset=utf-8'})});msgEl.textContent='Archivo guardado: '+name+'.';return}}}catch(e){msgEl.textContent='No se guardó el archivo. Puedes usar «Copiar».';return}try{const b=new Blob(['﻿'+text],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);msgEl.textContent='Descarga iniciada: '+name+'. Si no aparece, usa «Copiar» y pégalo en Excel.'}catch(e){msgEl.textContent='No se pudo descargar aquí. Usa «Copiar».'}}
+async function copyText(text,msgEl){try{await navigator.clipboard.writeText(text);msgEl.textContent='Copiado. Pégalo en una hoja de Excel o en un archivo .csv.'}catch(e){msgEl.textContent='El navegador no permitió copiar. Usa «Descargar».'}}
+const stamp=()=>new Date().toISOString().slice(0,16).replace(/[:T]/g,'-');
+$('#expCsv').addEventListener('click',()=>download('optitime_registros_'+stamp()+'.csv',recordsCsv(),$('#recMsg')));
+$('#copyCsv').addEventListener('click',()=>copyText(recordsCsv(),$('#recMsg')));
+$('#impCsv').addEventListener('change',async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{
+    const text=(await f.text()).replace(/^﻿/,'');const lines=text.split(/\r?\n/).filter(l=>l.trim());
+    const sep=(lines[0].match(/;/g)||[]).length>(lines[0].match(/,/g)||[]).length?';':',';
+    const parse=l=>{const out=[];let cur='',q=false;for(let i=0;i<l.length;i++){const ch=l[i];if(q){if(ch==='"'){if(l[i+1]==='"'){cur+='"';i++}else q=false}else cur+=ch}else if(ch==='"')q=true;else if(ch===sep){out.push(cur);cur=''}else cur+=ch}out.push(cur);return out};
+    const head=parse(lines[0]).map(h=>h.trim().toLowerCase());const ix=n=>head.indexOf(n);
+    if(ix('escenario')<0||ix('actividad_n')<0||ix('tiempo_s')<0||ix('ciclo')<0)throw new Error('cols');
+    const ids=new Set(records.map(r=>r.id));let added=0,bad=0;
+    for(const l of lines.slice(1)){const c=parse(l);const sec=parseFloat(String(c[ix('tiempo_s')]).replace(',','.'));const a=parseInt(c[ix('actividad_n')],10)-1;const cy=parseInt(c[ix('ciclo')],10);const sc=c[ix('escenario')];
+      if(!(sec>0)||!(a>=0)||!(cy>=1)||!SCENS.includes(sc)){bad++;continue}
+      const id=ix('id')>=0&&c[ix('id')]?c[ix('id')]:uid();if(ids.has(id))continue;ids.add(id);
+      records.push({id,ts:ix('fecha_hora')>=0&&c[ix('fecha_hora')]?c[ix('fecha_hora')]:new Date().toISOString(),scenario:sc,activity:a,activityName:ix('actividad')>=0?c[ix('actividad')]:'',cycle:cy,seconds:Math.round(sec*100)/100,source:ix('fuente')>=0&&SRC_LABEL[c[ix('fuente')]]?c[ix('fuente')]:'manual'});added++}
+    saveRecords();afterData();$('#recMsg').textContent='Importados '+added+' registros'+(bad?'; '+bad+' filas no válidas se omitieron':'')+'.';
+  }catch(err){$('#recMsg').textContent='No se pudo leer el archivo. Debe ser un CSV exportado por OptiTime (columnas escenario, actividad_n, ciclo, tiempo_s).'}
+});
+
+/* ---------- analysis ---------- */
+function fillSrcFilter(sel,val){sel.innerHTML=srcOptions(true);sel.value=[...sel.options].some(o=>o.value===val)?val:'todas'}
+function renderAnalysis(){
+  fillSrcFilter($('#srcFilter'),cfg.srcFilter);cfg.srcFilter=$('#srcFilter').value;
+  $('#conv').value=cfg.conv;$('#horas').value=cfg.horas;$('#excl').checked=!!cfg.excl;
+  $$('#anSeg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.an===anScen)));
+  $('#anScenLbl').textContent=anScen;
+  const k=cfg.acts.length;
+  $('#anTable').innerHTML='<thead><tr><th>Actividad</th><th class="n">n</th><th class="n">n req.</th><th class="n">TO (s)</th><th class="n">Desv. (s)</th><th class="n">CV</th><th class="n">Atíp.</th><th class="n">Valoración %</th><th class="n">TN (s)</th><th class="n">Supl. %</th><th class="n">TE (s)</th><th class="n">u/h</th><th class="n">u/turno</th></tr></thead><tbody>'+
+    cfg.acts.map((a,i)=>'<tr id="anr'+i+'"><td><span class="row" style="gap:6px;flex-wrap:nowrap"><span class="sw" style="background:var(--a'+(i%5+1)+')"></span>'+esc(a)+'<span data-bn></span></span></td><td class="n" data-c="n"></td><td class="n" data-c="nreq"></td><td class="n" data-c="mean"></td><td class="n" data-c="sd"></td><td class="n" data-c="cv"></td><td class="n" data-c="out"></td><td class="n"><input type="number" min="50" max="150" step="1" id="val'+i+'" data-p="valor" data-i="'+i+'" value="'+cfg.valor[i]+'" aria-label="Valoración de '+esc(a)+'"></td><td class="n" data-c="TN"></td><td class="n"><input type="number" min="0" max="80" step="0.5" id="sup'+i+'" data-p="supl" data-i="'+i+'" value="'+cfg.supl[i]+'" aria-label="Suplementos de '+esc(a)+'"></td><td class="n" data-c="TE" style="font-weight:600"></td><td class="n" data-c="cap"></td><td class="n" data-c="capT"></td></tr>').join('')+'</tbody>';
+  updateAnalysis();
+}
+function updateAnalysis(){
+  const R=computeScenario(anScen);
+  const w=$('#anWarn');const realSrc=R.sources;
+  w.innerHTML=cfg.srcFilter==='todas'&&realSrc.length>1?'<p class="alert">Este escenario tiene registros de varias fuentes ('+realSrc.map(s=>SRC_LABEL[s]).join(', ')+'). Elige una fuente para no contar dos veces los mismos ciclos.</p>':(R.nRows?'':'<div class="empty" style="margin-bottom:10px">No hay registros de '+esc(anScen)+' con esta fuente. Mide en la pestaña Captura.</div>');
+  R.per.forEach((p,i)=>{const tr=$('#anr'+i);if(!tr)return;const set=(c,v)=>{tr.querySelector('[data-c="'+c+'"]').innerHTML=v};
+    set('n',p.n||0);set('nreq',p.nreq!=null?'<span class="'+(p.n>=Math.ceil(p.nreq)?'up':'down')+'">'+Math.ceil(p.nreq)+'</span>':'—');set('mean',fmt(p.mean));set('sd',fmt(p.sd));set('cv',p.cv!=null?fmt(p.cv*100,1)+' %':'—');set('out',p.n||p.outliers?(cfg.excl&&p.excluded?p.excluded+' excl.':p.outliers):'—');
+    set('TN',fmt(p.TN));set('TE',fmt(p.TE));set('cap',fmt(p.cap,1));set('capT',fmt(p.capTurno,0));
+    const isBn=R.sys&&R.sys.bn===i;tr.classList.toggle('bn',!!isBn);tr.querySelector('[data-bn]').innerHTML=isBn?' <span class="pill bad">cuello de botella</span>':'';
+  });
+  const S=R.sys,k=cfg.acts.length;
+  $('#anSys').innerHTML=S?
+    '<div class="panel"><div class="ph"><h2>Un operario hace todo el ciclo</h2><span class="small muted">'+esc(anScen)+'</span></div><div class="pb kgrid">'+kpiMini('TE del ciclo',fmt(S.sumTE)+' s')+kpiMini('Capacidad',fmt(S.cap1,1)+' u/h')+kpiMini('Por turno ('+fmt(cfg.horas,1)+' h)',fmt(S.cap1*cfg.horas,0)+' u')+kpiMini('Productividad',fmt(S.prod1,1)+' u/h-h')+'</div></div>'+
+    '<div class="panel"><div class="ph"><h2>Una estación por operario</h2><span class="small muted">'+k+' operarios · '+esc(anScen)+'</span></div><div class="pb kgrid">'+kpiMini('Cuello de botella',esc(cfg.acts[S.bn]))+kpiMini('Capacidad de línea',fmt(S.capLine,1)+' u/h')+kpiMini('Productividad',fmt(S.prodLine,1)+' u/h-h')+kpiMini('Eficiencia de balance',fmt(S.balance*100,1)+' %')+'</div></div>'
+    :'<div class="panel"><div class="pb"><div class="empty">Faltan observaciones en al menos una actividad para calcular la capacidad del proceso.</div></div></div>';
+}
+function kpiMini(l,v){return'<div class="kmini"><span>'+l+'</span><strong>'+v+'</strong></div>'}
+$$('#anSeg button').forEach(b=>b.addEventListener('click',()=>{anScen=b.dataset.an;renderAnalysis()}));
+$('#srcFilter').addEventListener('change',e=>{cfg.srcFilter=e.target.value;saveCfg();simBuilt=false;updateAnalysis()});
+$('#conv').addEventListener('change',e=>{cfg.conv=e.target.value;saveCfg();simBuilt=false;updateAnalysis()});
+$('#horas').addEventListener('change',e=>{const v=parseFloat(e.target.value);if(v>0){cfg.horas=v;saveCfg();updateAnalysis()}else e.target.value=cfg.horas});
+$('#excl').addEventListener('change',e=>{cfg.excl=e.target.checked;saveCfg();simBuilt=false;updateAnalysis()});
+$('#anTable').addEventListener('input',e=>{const p=e.target.dataset.p;if(!p)return;const v=parseFloat(e.target.value);if(!ok(v))return;const i=+e.target.dataset.i;if(p==='supl'&&(v<0||v>=100))return;if(p==='valor'&&v<=0)return;cfg[p][i]=v;saveCfg();simBuilt=false;updateAnalysis()});
+function analysisCsv(){
+  const rows=[['escenario','actividad_n','actividad','fuente','n','n_requerido','TO_s','desv_s','valoracion_pct','TN_s','suplementos_pct','convencion','TE_s','capacidad_u_h','capacidad_u_turno']];
+  for(const sc of SCENS){const R=computeScenario(sc);R.per.forEach((p,i)=>rows.push([sc,i+1,cfg.acts[i],cfg.srcFilter,p.n||0,p.nreq!=null?Math.ceil(p.nreq):'',r4(p.mean),r4(p.sd),cfg.valor[i],r4(p.TN),cfg.supl[i],cfg.conv==='tn'?'TN*(1+s)':'TN/(1-s)',r4(p.TE),r4(p.cap),r4(p.capTurno)]))}
+  return csvJoin(rows);
+}
+const r4=x=>ok(x)?Math.round(x*10000)/10000:'';
+$('#expAn').addEventListener('click',()=>download('optitime_calculos_'+stamp()+'.csv',analysisCsv(),$('#anMsg')));
+$('#copyAn').addEventListener('click',()=>copyText(analysisCsv(),$('#anMsg')));
+
+/* ---------- comparison ---------- */
+function deltaHtml(a,b,higherBetter){const d=pct(a,b);if(d==null)return'<span class="muted">—</span>';const good=higherBetter?d>0:d<0;const cls=Math.abs(d)<0.05?'muted':good?'up':'down';return'<span class="'+cls+'">'+(d>0?'+':'')+fmt(d,1)+' %</span>'}
+function renderCompare(){
+  const A=computeScenario('AS-IS'),B=computeScenario('TO-BE'),k=cfg.acts.length;
+  const kp=(label,a,b,unit,hb,d=1)=>'<div class="kpi"><span class="label">'+label+'</span><span class="big">'+(ok(b)?fmt(b,d):'—')+' <span class="small muted">'+unit+'</span></span><span class="from">AS-IS '+(ok(a)?fmt(a,d):'—')+' '+unit+' · '+deltaHtml(a,b,hb)+'</span></div>';
+  const bnName=R=>R.sys?esc(cfg.acts[R.sys.bn]):'—';
+  $('#cmpKpis').innerHTML=(cfg.srcFilter==='todas'&&(A.sources.length>1||B.sources.length>1)?'<p class="alert" style="grid-column:1/-1;margin:0">Hay varias fuentes mezcladas. Elige una fuente en la pestaña Análisis.</p>':'')+
+    kp('Capacidad · 1 operario',A.sys&&A.sys.cap1,B.sys&&B.sys.cap1,'u/h',true)+
+    kp('Capacidad de línea',A.sys&&A.sys.capLine,B.sys&&B.sys.capLine,'u/h',true)+
+    kp('TE del ciclo',A.sys&&A.sys.sumTE,B.sys&&B.sys.sumTE,'s',false,2)+
+    '<div class="kpi"><span class="label">Cuello de botella</span><span class="big" style="font-family:var(--font-d);font-size:24px">'+bnName(B)+'</span><span class="from">AS-IS: '+bnName(A)+'</span></div>';
+  $('#cmpTable').innerHTML='<thead><tr><th>Actividad</th><th class="n">TE AS-IS</th><th class="n">TE TO-BE</th><th class="n">Δ</th><th class="n">u/h AS-IS</th><th class="n">u/h TO-BE</th><th class="n">Δ</th></tr></thead><tbody>'+
+    cfg.acts.map((a,i)=>{const p=A.per[i],q=B.per[i];return'<tr><td><span class="row" style="gap:6px;flex-wrap:nowrap"><span class="sw" style="background:var(--a'+(i%5+1)+')"></span>'+esc(a)+'</span></td><td class="n">'+fmt(p.TE)+'</td><td class="n">'+fmt(q.TE)+'</td><td class="n">'+deltaHtml(p.TE,q.TE,false)+'</td><td class="n">'+fmt(p.cap,1)+'</td><td class="n">'+fmt(q.cap,1)+'</td><td class="n">'+deltaHtml(p.cap,q.cap,true)+'</td></tr>'}).join('')+
+    '</tbody><tfoot><tr><td>Productividad 1 operario (u/h-h)</td><td class="n" colspan="2">'+fmt(A.sys&&A.sys.prod1,1)+' → '+fmt(B.sys&&B.sys.prod1,1)+'</td><td class="n">'+deltaHtml(A.sys&&A.sys.prod1,B.sys&&B.sys.prod1,true)+'</td><td>Línea (u/h-h)</td><td class="n">'+fmt(A.sys&&A.sys.prodLine,1)+' → '+fmt(B.sys&&B.sys.prodLine,1)+'</td><td class="n">'+deltaHtml(A.sys&&A.sys.prodLine,B.sys&&B.sys.prodLine,true)+'</td></tr></tfoot>';
+  $('#cmpChart').innerHTML=barChart(A,B);
+  renderPrecision();renderBE();
+  if(!simBuilt)simBuild();simDraw();
+}
+function niceMax(v){if(!(v>0))return 1;const p=Math.pow(10,Math.floor(Math.log10(v))),n=v/p;return(n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p}
+function barChart(A,B){
+  const k=cfg.acts.length,vals=[];A.per.forEach(p=>ok(p.TE)&&vals.push(p.TE));B.per.forEach(p=>ok(p.TE)&&vals.push(p.TE));
+  if(!vals.length)return'<div class="empty">Sin datos para graficar.</div>';
+  const W=Math.max(320,Math.round($('#cmpChart').clientWidth||640)),H=260,L=46,T=26,Bm=40,ph=H-T-Bm,gw=(W-L-10)/k,bw=Math.min(54,gw*0.26);
+  const mx=niceMax(Math.max(...vals)*1.1),steps=5,y=v=>T+ph-(v/mx)*ph;
+  let s='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Tiempo estándar por actividad, AS-IS frente a TO-BE" font-family="IBM Plex Sans, system-ui, sans-serif">';
+  for(let i=0;i<=steps;i++){const v=mx*i/steps,yy=y(v);s+='<line x1="'+L+'" x2="'+(W-10)+'" y1="'+yy+'" y2="'+yy+'" stroke="var(--line)" stroke-width="1"'+(i?' stroke-dasharray="2 4"':'')+'/><text x="'+(L-8)+'" y="'+(yy+4)+'" text-anchor="end" font-size="11" fill="var(--ink-2)" font-family="IBM Plex Mono, monospace">'+fmt(v,v<10?1:0)+'</text>'}
+  s+='<text x="'+L+'" y="14" font-size="11" fill="var(--ink-2)">segundos</text>';
+  cfg.acts.forEach((a,i)=>{const cx=L+gw*i+gw/2;[[A.per[i].TE,'var(--ink-2)',-1,'AS-IS'],[B.per[i].TE,'var(--a'+(i%5+1)+')',1,'TO-BE']].forEach(([v,col,side])=>{if(!ok(v))return;const x=cx+side*(bw/2+3)-bw/2,yy=y(v);s+='<rect x="'+x+'" y="'+yy+'" width="'+bw+'" height="'+(T+ph-yy)+'" rx="3" fill="'+col+'"'+(side<0?' opacity=".55"':'')+'/><text x="'+(x+bw/2)+'" y="'+(yy-5)+'" text-anchor="middle" font-size="11" fill="var(--ink)" font-family="IBM Plex Mono, monospace">'+fmt(v,1)+'</text>'});
+    const lbl=a.length>20?a.slice(0,19)+'…':a;s+='<text x="'+cx+'" y="'+(H-Bm+18)+'" text-anchor="middle" font-size="12" fill="var(--ink)">'+esc(lbl)+'</text>'});
+  s+='<rect x="'+(W-170)+'" y="6" width="10" height="10" rx="2" fill="var(--ink-2)" opacity=".55"/><text x="'+(W-155)+'" y="15" font-size="11" fill="var(--ink-2)">AS-IS</text><rect x="'+(W-110)+'" y="6" width="10" height="10" rx="2" fill="var(--accent)"/><text x="'+(W-95)+'" y="15" font-size="11" fill="var(--ink-2)">TO-BE</text>';
+  return s+'</svg>';
+}
+function renderPrecision(){
+  const present=[...new Set(records.map(r=>r.source))].filter(s=>s!=='ejemplo');
+  const sel=$('#refSrc');const opts=['video','manual','cronometro','camara'].filter(s=>present.includes(s));
+  if(!cfg.refSrc||!opts.includes(cfg.refSrc))cfg.refSrc=opts[0]||'';
+  sel.innerHTML=opts.map(s=>'<option value="'+s+'">Referencia: '+SRC_LABEL[s]+'</option>').join('');sel.value=cfg.refSrc;sel.hidden=opts.length<2;
+  const box=$('#precBox');
+  if(opts.length<2){box.innerHTML='<div class="empty small">Mide los mismos ciclos con la cámara y con otra fuente (cronómetro físico o revisión de video) y aparecerá aquí el error de cada método frente a la referencia.</div>';return}
+  const map={};for(const r of records){if(r.source==='ejemplo')continue;const key=r.scenario+'|'+r.cycle+'|'+r.activity;(map[key]=map[key]||{});(map[key][r.source]=map[key][r.source]||[]).push(r.seconds)}
+  const avg=a=>a.reduce((x,y)=>x+y,0)/a.length;const ref=cfg.refSrc;
+  const rows=opts.filter(s=>s!==ref).map(s=>{let n=0,ae=0,ape=0,bias=0,mx=0;for(const key in map){const m=map[key];if(m[ref]&&m[s]){const rv=avg(m[ref]),v=avg(m[s]),d=v-rv;n++;ae+=Math.abs(d);bias+=d;ape+=Math.abs(d)/rv;mx=Math.max(mx,Math.abs(d))}}return{s,n,mae:n?ae/n:null,mape:n?ape/n*100:null,bias:n?bias/n:null,mx:n?mx:null}});
+  box.innerHTML='<div class="tw"><table class="tbl"><thead><tr><th>Método</th><th class="n">Pares</th><th class="n">Error medio</th><th class="n">Error %</th><th class="n">Sesgo</th><th class="n">Máx.</th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+SRC_LABEL[r.s]+'</td><td class="n">'+r.n+'</td><td class="n">'+fmt(r.mae)+' s</td><td class="n">'+fmt(r.mape,1)+' %</td><td class="n">'+(ok(r.bias)?(r.bias>0?'+':'')+fmt(r.bias):'—')+' s</td><td class="n">'+fmt(r.mx)+' s</td></tr>').join('')+'</tbody></table></div><p class="small muted" style="margin-top:8px">Se comparan registros del mismo escenario, ciclo y actividad. Sesgo positivo: el método mide más que la referencia.</p>';
+}
+$('#refSrc').addEventListener('change',e=>{cfg.refSrc=e.target.value;saveCfg();renderPrecision()});
+function renderBE(){
+  const b=cfg.be;['Hm','Ht','C','Cf','Cv'].forEach(k=>{const el=$('#be'+k);if(document.activeElement!==el)el.value=b[k.toLowerCase()]});
+  const save=(b.hm-b.ht)*b.c-b.cv;
+  $('#beOut').innerHTML=save>0?'<p>Ahorro por estudio: <span class="num" style="font-weight:600">S/ '+fmt(save,2)+'</span>. La herramienta recupera su costo fijo a partir del estudio <span class="num" style="font-weight:600">N.º '+Math.ceil(b.cf/save||0)+'</span>'+(b.cf>0?' (equilibrio en '+fmt(b.cf/save,1)+' estudios)':'')+'.</p>':'<p class="down">Con estos supuestos la herramienta no ahorra: el costo por estudio con OptiTime es igual o mayor que el manual.</p>';
+}
+['Hm','Ht','C','Cf','Cv'].forEach(k=>$('#be'+k).addEventListener('input',e=>{const v=parseFloat(e.target.value);if(ok(v)&&v>=0){cfg.be[k.toLowerCase()]=v;saveCfg();renderBE()}}));
+
+/* ---------- simulation ---------- */
+let simBuilt=false;const sim={lanes:[],t:0,running:false,last:0,raf:0,started:false,want:false};
+function simBuild(){
+  const lanes=[];for(const sc of SCENS){const R=computeScenario(sc);if(!R.complete)continue;lanes.push({name:sc,TE:R.per.map(p=>p.TE),cv:R.per.map(p=>p.cv||0),bn:R.sys.bn,st:R.per.map((p,i)=>({q:i===0?Infinity:0,busy:false,rem:0,dur:0})),done:0,rng:mulberry32(42)})}
+  sim.lanes=lanes;sim.t=0;simBuilt=true;
+}
+function simSample(l,i){const te=l.TE[i];if(!$('#simVar').checked)return te;return Math.min(te*2,Math.max(te*0.4,te*(1+l.cv[i]*gauss(l.rng))))}
+function simStep(dt){let rem=dt;while(rem>1e-9){const h=Math.min(0.05,rem);for(const l of sim.lanes){const k=l.st.length;for(let i=k-1;i>=0;i--){const s=l.st[i];if(s.busy){s.rem-=h;if(s.rem<=0){s.busy=false;if(i+1<k)l.st[i+1].q++;else{l.done++;if(l.done===1)l.t1=sim.t+h}}}}for(let i=0;i<k;i++){const s=l.st[i];if(!s.busy&&s.q>0){s.q--;s.busy=true;s.dur=simSample(l,i);s.rem=s.dur}}}sim.t+=h;rem-=h}}
+function simFrame(now){if(!sim.running)return;const dt=Math.min(0.1,(now-sim.last)/1000);sim.last=now;simStep(dt*(+$('#simSpeed').value));simDraw();sim.raf=requestAnimationFrame(simFrame)}
+function simPlay(){sim.want=true;if(sim.running||!sim.lanes.length)return;sim.running=true;sim.last=performance.now();$('#simPlay').textContent='Pausar';sim.raf=requestAnimationFrame(simFrame)}
+function simPause(fromTab){if(!fromTab)sim.want=false;sim.running=false;cancelAnimationFrame(sim.raf);$('#simPlay').textContent='Reproducir'}
+function simEnsure(){if(!simBuilt)simBuild();simDraw();const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;if((!sim.started&&!rm)||sim.want){sim.started=true;simPlay()}}
+$('#simPlay').addEventListener('click',()=>{if(sim.running)simPause();else simPlay()});
+$('#simReset').addEventListener('click',()=>{simBuild();simDraw()});
+$('#simVar').addEventListener('change',()=>{simBuild();simDraw()});
+function rr(ctx,x,y,w,h,r){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h)}
+function simDraw(){
+  const cv=$('#simCanvas'),ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1;
+  const cssW=cv.clientWidth||cv.parentElement.clientWidth||600;
+  const narrow=cssW<560,nL=Math.max(1,sim.lanes.length),laneH=narrow?140:116,cssH=28+nL*laneH;
+  if(cv.width!==Math.round(cssW*dpr)||cv.height!==Math.round(cssH*dpr)){cv.width=Math.round(cssW*dpr);cv.height=Math.round(cssH*dpr);cv.style.height=cssH+'px'}
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,cssW,cssH);ctx.textAlign='left';
+  const sans='"IBM Plex Sans",system-ui,sans-serif',mono='"IBM Plex Mono",ui-monospace,monospace';
+  const mm=Math.floor(sim.t/60),ss=Math.floor(sim.t%60);
+  ctx.font='500 12px '+mono;ctx.fillStyle=C('--ink-2');ctx.fillText('Tiempo simulado  '+String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0'),0,13);
+  if(!sim.lanes.length){ctx.font='14px '+sans;ctx.fillText('Se necesitan observaciones de todas las actividades en al menos un escenario.',0,56);return}
+  sim.lanes.forEach((l,li)=>{
+    const y0=28+li*laneH,k=l.st.length;
+    if(li>0){ctx.strokeStyle=C('--line');ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,y0-6.5);ctx.lineTo(cssW,y0-6.5);ctx.stroke()}
+    const left=narrow?0:86,right=narrow?64:104,span=cssW-left-right,gap=span/k,bw=Math.min(156,gap*(narrow?0.7:0.6)),bh=50,by=y0+(narrow?48:30),cy=by+bh/2;
+    const thr=l.done>=3?(l.done-1)/Math.max(1e-6,sim.t-l.t1)*3600:null;
+    const capTxt=(narrow?'Teórica ':'Capacidad teórica ')+fmt(3600/l.TE[l.bn],1)+' u/h · simulada '+(thr!=null?fmt(thr,1):'…')+' u/h';
+    ctx.font='600 14px '+sans;ctx.fillStyle=C('--ink');ctx.fillText(l.name,0,narrow?y0+16:cy+5);
+    ctx.font='500 '+(narrow?11:12)+'px '+mono;ctx.fillStyle=C('--ink-2');
+    if(narrow)ctx.fillText(capTxt,0,y0+33);else{ctx.textAlign='right';ctx.fillText(capTxt,cssW,y0+12);ctx.textAlign='left'}
+    const x1=cssW-right+2;
+    ctx.strokeStyle=C('--line');ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(left,cy);ctx.lineTo(x1,cy);ctx.stroke();
+    ctx.fillStyle=C('--line');ctx.beginPath();ctx.moveTo(x1+7,cy);ctx.lineTo(x1-1,cy-5);ctx.lineTo(x1-1,cy+5);ctx.closePath();ctx.fill();
+    l.st.forEach((s,i)=>{
+      const bx=left+gap*i+(gap-bw),col=actColor(i),isBn=i===l.bn,qx1=bx-8,qx0=left+gap*i+4;
+      if(i===0){ctx.font='500 12px '+mono;ctx.fillStyle=C('--ink-2');ctx.textAlign='right';ctx.fillText('∞',qx1,cy-7);ctx.textAlign='left'}
+      else{
+        const n=s.q,per=Math.max(1,Math.floor((qx1-qx0)/10)),rows=3,show=Math.min(n,per*rows);
+        ctx.fillStyle=col;for(let j=0;j<show;j++){const tx=qx1-8-(j%per)*10,ty=cy-4-Math.floor(j/per)*10;rr(ctx,tx,ty,8,8,2);ctx.fill()}
+        ctx.textAlign='right';
+        if(n>show){ctx.font='600 11px '+mono;ctx.fillStyle=C('--ink');ctx.fillText('+'+(n-show),qx1,cy-30)}
+        if(n>0){ctx.font='500 10.5px '+mono;ctx.fillStyle=C('--ink-2');ctx.fillText('cola '+n,qx1,cy+20)}
+        ctx.textAlign='left';
+      }
+      ctx.fillStyle=C('--surface');rr(ctx,bx,by,bw,bh,7);ctx.fill();
+      ctx.lineWidth=isBn?2:1.25;ctx.strokeStyle=isBn?C('--bad'):C('--line');rr(ctx,bx,by,bw,bh,7);ctx.stroke();
+      ctx.fillStyle=col;rr(ctx,bx+7,by+9,4,bh-18,2);ctx.fill();
+      ctx.fillStyle=C('--line');ctx.fillRect(bx+17,by+bh-10,bw-26,3);
+      if(s.busy){const f=Math.max(0,Math.min(1,1-s.rem/s.dur));ctx.fillStyle=col;ctx.fillRect(bx+17,by+bh-10,(bw-26)*f,3)}
+      ctx.fillStyle=C('--ink');ctx.font='600 12px '+sans;const nm=cfg.acts[i]||'';let t=nm;if(ctx.measureText(nm).width>bw-24){while(t.length>2&&ctx.measureText(t+'…').width>bw-24)t=t.slice(0,-1);t+='…'}ctx.fillText(t,bx+17,by+18);
+      ctx.font='500 11px '+mono;ctx.fillStyle=C('--ink-2');ctx.fillText('TE '+fmt(l.TE[i],1)+' s',bx+17,by+33);
+      if(isBn){ctx.font='600 10px '+sans;ctx.fillStyle=C('--bad');ctx.fillText(narrow?'RESTRICCIÓN':'CUELLO DE BOTELLA',bx,by+bh+14)}
+    });
+    const ex=x1+14;ctx.font='600 20px '+mono;ctx.fillStyle=C('--ink');ctx.fillText(String(l.done),ex,cy+2);ctx.font='500 11px '+sans;ctx.fillStyle=C('--ink-2');ctx.fillText(narrow?'listos':'terminados',ex,cy+17);
+  });
+}
+window.addEventListener('resize',()=>{if(curTab==='comparacion'){$('#cmpChart').innerHTML=barChart(computeScenario('AS-IS'),computeScenario('TO-BE'));simDraw()}});
+
+/* ---------- init ---------- */
+const sn=$('#studyName');sn.value=cfg.study||'Despacho documentario';
+const crumb=()=>{$('#crumb').textContent=(cfg.study||'Despacho documentario')+' · Estudio de tiempos'};crumb();
+sn.addEventListener('change',()=>{cfg.study=sn.value.trim()||'Despacho documentario';sn.value=cfg.study;saveCfg();crumb()});
+$$('#scenSeg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.scen===scenario)));
+cap.cycle=nextCycle(scenario,'camara');
+renderBanner();setMode('camara');showTab('captura');
+requestAnimationFrame(loop);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(curTab==='comparacion')simDraw()});
+})();
+</script>
+
+</body>
+</html>
